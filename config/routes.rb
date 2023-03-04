@@ -1,7 +1,21 @@
 Rails.application.routes.draw do
-  namespace :public do
+
+  #一般ユーザー用
+  #URL /general_users/sign_in ...
+  #コントローラーがどこに存在するか記述
+  devise_for :general_users,skip: [:passwords], controllers: {
+    registrations: "general_user/registrations",
+    sessions: "general_user/sessions"
+  }
+
+  #自治体職員用
+  #URL /staff/sign_in...
+  devise_for :staffs,skip: [:registrations, :passwords], controllers: {
+    sessions: "staff/sessions"
+  }
+  namespace :general_user do
     get 'posts/new'
-    get 'posts/index'
+    get 'posts' => 'posts#index'
     get 'posts/edit'
     get 'posts/show'
     post 'posts' => 'posts#create'
