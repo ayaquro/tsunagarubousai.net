@@ -1,2 +1,19 @@
-<h1>Public::Posts#new</h1>
-<p>Find me in app/views/public/posts/new.html.erb</p>
+<h1>危険箇所の新規投稿</h1>
+<!-- form_with部分 -->
+<%= form_with model: @post, url: '/public/posts/new' do |f| %>
+<!--postより上の階層（public）があるため、urlの記載が必要-->
+
+<h4>投稿画像ファイル</h4>
+
+<h4>当該地区の選択</h4>
+<!-- enumの設定？ -->
+
+<h4>タイトル</h4>
+<%= f.text_field :posted_title %>
+
+<h4>本文</h4>
+<%= f.text_area :posted_text %>
+
+<%= f.submit '投稿' %>
+
+<% end %>
