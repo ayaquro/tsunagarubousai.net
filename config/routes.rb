@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     get 'posts/index'
     get 'posts/edit'
     get 'posts/show'
+    post 'posts' => 'posts#create'
   end
   namespace :public do
     get 'homes/top'
