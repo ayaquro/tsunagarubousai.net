@@ -1,4 +1,4 @@
-class PostsController < ApplicationController
+class GeneralUser::PostsController < ApplicationController
   def new
     # Viewへ渡すためのインスタンス変数に空のModelオブジェクトを生成する。
     @post = Post.new
@@ -9,8 +9,8 @@ class PostsController < ApplicationController
     post = Post.new(post_params)
     #データをデータベースに保存するためのsaveメソッド実行
     post.save
-    #トップ画面へリダイレクト 後で変更するかも
-    redirect_to '/top'
+    #詳細画面へリダイレクト
+    redirect_to general_user_path(post.id)
   end
 
   def index
@@ -18,6 +18,7 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @post = Post.find(params[:id])
   end
 
   def show
@@ -33,7 +34,7 @@ class PostsController < ApplicationController
   private
   #ストロングパラメータ
   def post_params
-    params.require(:post).permit(:posted_title, :posted_text)
+    params.require(:post).permit(:posted_title, :posted_text, :posted_image)
     #後ほど地区選択もpermitの中に入れるかも
   end
 end

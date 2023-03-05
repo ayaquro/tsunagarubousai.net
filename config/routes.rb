@@ -12,15 +12,11 @@ Rails.application.routes.draw do
   devise_for :staffs,skip: [:registrations, :passwords], controllers: {
     sessions: "staff/sessions"
   }
-  namespace :general_user do
-    get 'posts/new'
-    get 'posts' => 'posts#index'
-    get 'posts/edit'
-    get 'posts/:id' =>'posts#show'
-    post 'posts' => 'posts#create'
-  end
-  namespace :public do
-    get 'homes/top'
-  end
+   namespace :general_user do
+    resources :posts, only: [:new, :create, :index, :edit, :show, :update, :destroy]
+   end
+  # namespace :public do
+    root to: 'homes#top'
+  # end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -1,7 +1,12 @@
 <h1>危険箇所投稿一覧</h1>
 <% @posts.each do |post| %>
 
+<p>画像</p>
+<%= image_tag post.posted_image, size: "200x200" %>
+
 <p>タイトル</p>
-<span><%= post.posted_title %></span>
+<span>
+<%= link_to post.posted_title, post_path(post.id) %>
+</span>
 
 <% end %>
