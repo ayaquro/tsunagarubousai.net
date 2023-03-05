@@ -1,4 +1,4 @@
-class Public::PostsController < ApplicationController
+class PostsController < ApplicationController
   def new
     # Viewへ渡すためのインスタンス変数に空のModelオブジェクトを生成する。
     @post = Post.new
@@ -21,6 +21,7 @@ class Public::PostsController < ApplicationController
   end
 
   def show
+    @post = Post.find(params[:id])
   end
 
   def update

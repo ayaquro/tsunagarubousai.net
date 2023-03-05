@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_04_075120) do
+ActiveRecord::Schema.define(version: 2023_03_05_052953) do
 
   create_table "dangers", force: :cascade do |t|
     t.integer "general_user_id", null: false
@@ -30,11 +30,14 @@ ActiveRecord::Schema.define(version: 2023_03_04_075120) do
     t.string "first_name", null: false
     t.string "kana_last_name", null: false
     t.string "kana_first_name", null: false
-    t.string "email", null: false
-    t.string "encrypted_password", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
     t.integer "registration_status", default: 0, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["email"], name: "index_general_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_general_users_on_reset_password_token", unique: true
   end
 
   create_table "posted_comments", force: :cascade do |t|
@@ -55,10 +58,13 @@ ActiveRecord::Schema.define(version: 2023_03_04_075120) do
   end
 
   create_table "staffs", force: :cascade do |t|
-    t.string "email", null: false
-    t.string "encrypted_password", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["email"], name: "index_staffs_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_staffs_on_reset_password_token", unique: true
   end
 
 end

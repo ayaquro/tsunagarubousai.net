@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   #一般ユーザー用
   #URL /general_users/sign_in ...
   #コントローラーがどこに存在するか記述
@@ -17,7 +16,7 @@ Rails.application.routes.draw do
     get 'posts/new'
     get 'posts' => 'posts#index'
     get 'posts/edit'
-    get 'posts/show'
+    get 'posts/:id' =>'posts#show'
     post 'posts' => 'posts#create'
   end
   namespace :public do
