@@ -10,7 +10,7 @@ class GeneralUser::PostsController < ApplicationController
     #データをデータベースに保存するためのsaveメソッド実行
     post.save
     #詳細画面へリダイレクト
-    redirect_to general_user_path(post.id)
+    redirect_to post_path(post.id)
   end
 
   def index
@@ -31,7 +31,7 @@ class GeneralUser::PostsController < ApplicationController
   def destroy
     post = Post.find(params[:id]) #データ（レコード）を1件取得
     post.destroy #データ（レコード）を削除
-    redirect_to general_user_posts_path #指定したページにリダイレクト 要確認
+    redirect_to posts_path #一覧ページにリダイレクト 要確認
   end
 
   private

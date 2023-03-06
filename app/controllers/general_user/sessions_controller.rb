@@ -4,9 +4,11 @@ class GeneralUser::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
   before_action :general_user_state, only: [:create]
   # GET /resource/sign_in
-  # def new
-  #   super
-  # end
+  #ログインしている時にログイン画面へ飛ぼうとしたらルートへ飛ばす
+  def new
+    redirect_to :root if general_user_signed_in?
+   super
+  end
 
   # POST /resource/sign_in
   # def create

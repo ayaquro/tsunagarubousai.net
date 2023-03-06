@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class GeneralUser::RegistrationsController < Devise::RegistrationsController
+  #devise利用の機能（ユーザ登録、ログイン認証など）が
+  #使われる前にconfigure_permitted_parametersが実行される
+  before_action :configure_permitted_parameters, if: :devise_controller?
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -59,4 +62,10 @@ class GeneralUser::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+    protected
+
+    def configure_permitted_parameters
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:last_name, :first_name, :kana_last_name, :kana_first_name, :registration_status])
+    end
 end
