@@ -2,7 +2,11 @@
 <% @posts.each do |post| %>
 
 <p>画像</p>
+<% if post.posted_image.attached? %>
 <%= image_tag post.posted_image, size: "200x200" %>
+<% else %>
+<%= image_tag '画像未登録', size: "200x200" %>
+<% end %>
 
 <p>タイトル</p>
 <span>

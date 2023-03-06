@@ -1,6 +1,11 @@
 <h1>投稿詳細画面</h1>
 
-<h4>投稿画像</h4>
+<h4>画像</h4>
+<% if post.posted_image.attached? %>
+<%= image_tag post.posted_image, size: "200x200" %>
+<% else %>
+<%= image_tag '画像未登録', size: "200x200" %>
+<% end %>
 
 <h4>地区</h4>
 
@@ -9,3 +14,6 @@
 
 <h4>本文</h4>
 <p><%= @post.posted_text %></p>
+
+<%= link_to "編集", edit_general_user_post_path(@post.id) %>
+<%= link_to "削除", general_user_post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>

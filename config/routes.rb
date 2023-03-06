@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     resources :posts, only: [:new, :create, :index, :edit, :show, :update, :destroy]
    end
   # namespace :public do
-    root to: 'homes#top'
+    root to: "homes#top"
   # end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

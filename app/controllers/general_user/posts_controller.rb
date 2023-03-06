@@ -29,6 +29,9 @@ class GeneralUser::PostsController < ApplicationController
   end
 
   def destroy
+    post = Post.find(params[:id]) #データ（レコード）を1件取得
+    post.destroy #データ（レコード）を削除
+    redirect_to general_user_posts_path #指定したページにリダイレクト 要確認
   end
 
   private
