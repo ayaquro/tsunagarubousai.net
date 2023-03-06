@@ -1,7 +1,6 @@
 <h1>危険箇所の新規投稿</h1>
 <!-- form_with部分 -->
-<%= form_with model: @post, url: '/general_user/posts',method: :post do |f| %>
-<!--postより上の階層（general_user）があるため、urlの記載が必要-->
+<%= form_with model: @post, url: '/posts',method: :post do |f| %>
 
 <h4>投稿画像</h4>
 <%= f.file_field :posted_image, accept: "image/*" %>
