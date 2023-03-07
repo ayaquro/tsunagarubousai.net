@@ -1,32 +1,31 @@
 <h2>新規会員登録</h2>
 
-<%= form_with(model: resource, scope: resource_name, url: general_user_registration_path(resource_name)) do |f| %>
-<%#= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%#= render "general_users/shared/error_messages", resource: resource %>
+<%= form_with model: @general_user, url: general_user_registration_path, local: true do |f| %>
+  <%#= render "shared/error_messages", resource: resource %>
 
   <div class="field">
     <%= f.label :姓 %><br>
-    <%= f.text_field :last_name %>
+    <%= f.text_field :last_name, autofocus: true, placeholder: "例）防災" %>
   </div>
 
   <div class="field">
     <%= f.label :名 %><br>
-    <%= f.text_field :first_name %>
+    <%= f.text_field :first_name, autofocus: true, placeholder: "例）備子"  %>
     </div>
 
   <div class="field">
     <%= f.label :セイ %><br>
-    <%= f.text_field :kana_first_name %>
+    <%= f.text_field :kana_last_name, autofocus: true, placeholder: "例）ボウサイ" %>
   </div>
 
   <div class="field">
     <%= f.label :メイ %><br>
-    <%= f.text_field :kana_last_name %>
+    <%= f.text_field :kana_first_name, autofocus: true, placeholder: "例）トモコ" %>
   </div>
 
   <div class="field">
     <%= f.label :メールアドレス %><br>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "例）bousai@taisaku.com" %>
   </div>
 
   <div class="field">
@@ -34,16 +33,16 @@
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> 文字以上)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.password_field :password, autocomplete: "new-password", placeholder: "ご自身で決めたパスワードを入力" %>
   </div>
 
   <div class="field">
     <%= f.label :パスワード（確認用） %><br>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "確認のためもう一度入力" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "新規登録" %>
   </div>
 <% end %>
 

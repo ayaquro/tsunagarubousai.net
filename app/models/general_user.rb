@@ -3,6 +3,8 @@ class GeneralUser < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+         
+  has_many :posts, dependent: :destroy
 
   enum registration_status: { registering: 0, in_suspend: 1, unsubscribe: 2 }
 end

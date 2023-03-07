@@ -5,12 +5,10 @@ class GeneralUser::PostsController < ApplicationController
   end
 
   def create
-    #データを受け取り新規登録するためのインスタンス作成
-    post = Post.new(post_params)
-    #データをデータベースに保存するためのsaveメソッド実行
-    post.save
-    #詳細画面へリダイレクト
-    redirect_to post_path(post.id)
+    @post = Post.new(post_params) #フォームに入力されたデータが@postに格納される
+    @post.general_user_id = current_user.id　#この投稿のgeneral_user_idとして、current_user.idの値を代入
+    @post.save  #データをデータベースに保存するためのsaveメソッド実行
+    redirect_to posts_path   #投稿一覧画面へリダイレクト
   end
 
   def index
@@ -26,6 +24,9 @@ class GeneralUser::PostsController < ApplicationController
   end
 
   def update
+    post = Post.find(params[:id])
+    post.update(post_params)
+    redirect_to post_path(post.id) #詳細ページにリダイレクト
   end
 
   def destroy

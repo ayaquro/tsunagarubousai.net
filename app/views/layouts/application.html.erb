@@ -14,11 +14,14 @@
     <header>
       <% if general_user_signed_in? %>
       <il>
+        <%= link_to "危険箇所の投稿", new_post_path %>
+      </il>
+      <il>
         <%= link_to "ログアウト", destroy_general_user_session_path, method: :delete %>
       </il>
       <% else %>
       <il>
-        <%= link_to "新規登録", new_general_user_registration_path %>
+        <%= link_to "新規会員登録", new_general_user_registration_path %>
       </il>
       <il>
         <%= link_to "ログイン", new_general_user_session_path %>
