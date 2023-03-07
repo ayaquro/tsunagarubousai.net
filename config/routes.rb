@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :general_user do
+    get 'general_users/show'
+    get 'general_users/edit'
+  end
   #一般ユーザー用
   #URL /general_users/sign_in ...
   #コントローラーがどこに存在するか記述
@@ -17,6 +21,7 @@ Rails.application.routes.draw do
 
   scope module: :general_user do
     resources :posts, only: [:new, :create, :index, :edit, :show, :update, :destroy]
+    resources :general_users, only: [:show, :edit]
   end
 
   # namespace :staff do

@@ -49,7 +49,6 @@ class GeneralUser::RegistrationsController < Devise::RegistrationsController
     def configure_sign_up_params
       devise_parameter_sanitizer.permit(:sign_up, keys: [:last_name, :first_name, :kana_last_name, :kana_first_name])
     end
-configure_account_update_params
   # If you have extra params to permit, append them to the sanitizer.
     def configure_account_update_params
       devise_parameter_sanitizer.permit(:account_update, keys: [:last_name, :first_name, :kana_last_name, :kana_first_name])

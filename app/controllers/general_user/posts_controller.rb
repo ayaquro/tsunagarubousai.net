@@ -5,8 +5,9 @@ class GeneralUser::PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params) #フォームに入力されたデータが@postに格納される
-    @post.general_user_id = current_user.id　#この投稿のgeneral_user_idとして、current_user.idの値を代入
+    @post = Post.new(post_params)   #フォームに入力されたデータが@postに格納される
+    @post.general_user_id = current_general_user.id   #この投稿のgeneral_user_idとして、current_user.idの値を代入
+    @post.district_id = 1 #とりあえず仮で地域を入れておく
     @post.save  #データをデータベースに保存するためのsaveメソッド実行
     redirect_to posts_path   #投稿一覧画面へリダイレクト
   end
@@ -30,7 +31,7 @@ class GeneralUser::PostsController < ApplicationController
   end
 
   def destroy
-    post = Post.find(params[:id]) #データ（レコード）を1件取得
+    post = Post.find(params[:id]) #削除するデータ（レコード）を1件取得
     post.destroy #データ（レコード）を削除
     redirect_to posts_path #一覧ページにリダイレクト 要確認
   end

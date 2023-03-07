@@ -1,19 +1,14 @@
-<h1>投稿詳細画面</h1>
-
-<h4>投稿画像</h4>
-<% if @post.posted_image.attached? %>
-<%= image_tag @post.posted_image, size: "300x300" %>
-<% else %>
-<%= image_tag '画像未登録', size: "300x300" %>
-<% end %>
-
-<h4>地区</h4>
-
-<h4>タイトル</h4>
-<p><%= @post.posted_title %></p>
-
-<h4>本文</h4>
-<p><%= @post.posted_text %></p>
-
+<h1>投稿詳細</h1>
+<div>
+<%= image_tag @post.get_image %>
+<p>地区</p>
+<p>タイトル: <%= @post.posted_title %></p>
+<P>本文: <%= @post.posted_text %></p>
+<p>投稿者: <%= @post.general_user.last_name %><%= @post.general_user.first_name %></p>
+<p>投稿日時:<%= @post.created_at.strftime("%Y/%m/%d %H:%M:%S") %></p>
+<!--編集も削除も投稿したユーザー以外はできないようにする-->
+<% if @post.general_user == current_general_user %>
 <%= link_to "編集", edit_post_path(@post.id) %>
 <%= link_to "削除", post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+<% end %>
+</div>

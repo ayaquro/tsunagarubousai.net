@@ -1,16 +1,19 @@
 <h1>危険箇所投稿一覧</h1>
 <% @posts.each do |post| %>
-
-<p>画像</p>
-<% if post.posted_image.attached? %>
-<%= image_tag post.posted_image, size: "200x200" %>
-<% else %>
-<%= image_tag '画像未登録', size: "200x200" %>
+<!--コントローラから渡された@posts変数内から一つずつ取り出してpost変数へ格納-->
+<div>
+<!--image tagを使いposted_imageにActiveStrageで設定したimageを表示-->
+<!--posted_image.get_imageはpostモデル内に記述したメソッドを呼び出している-->
+<!--投稿画像-->
+<%= link_to post_path(post.id) do %>
+  <%= image_tag post.get_image %>
 <% end %>
-
-<p>タイトル</p>
-<span>
-<%= link_to post.posted_title, post_path(post.id) %>
+<p>地区</p>
+<P>タイトル: <%= post.posted_title %></p>
+<p>本文: <%= post.posted_text %></p>
+<p>投稿者: <%= post.general_user.last_name %><%= post.general_user.first_name %></p>
+<!--アソシエーションを結んでいるため、postと紐づいたgeneral_usersテーブルの中にあるlast_name、の呼び出し方ができる-->
+<p>投稿日時: <%= post.created_at.strftime("%Y/%m/%d %H:%M:%S") %></p>
 </span>
-
+</div>
 <% end %>
