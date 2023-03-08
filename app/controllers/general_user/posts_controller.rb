@@ -27,7 +27,7 @@ class GeneralUser::PostsController < ApplicationController
   def update
     post = Post.find(params[:id])
     post.update(post_params)
-    redirect_to post_path(post.id) #詳細ページにリダイレクト
+    redirect_to post_path(post.id) #投稿詳細ページにリダイレクト
   end
 
   def destroy

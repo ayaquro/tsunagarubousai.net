@@ -17,7 +17,7 @@
         <%= link_to "危険箇所の投稿", new_post_path %>
       </il>
       <il>
-        <%= link_to "マイページ", general_user_general_users_show_path(current_general_user.id) %>
+        <%= link_to "マイページ", general_user_path(current_general_user.id) %>
       </il>
       <il>
         <%= link_to "ログアウト", destroy_general_user_session_path, method: :delete %>

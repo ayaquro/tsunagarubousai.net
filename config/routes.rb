@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   scope module: :general_user do
     resources :posts, only: [:new, :create, :index, :edit, :show, :update, :destroy]
-    resources :general_users, only: [:show, :edit]
+    resources :general_users, only: [:show, :edit, :update]
   end
 
   # namespace :staff do

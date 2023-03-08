@@ -1,1 +1,49 @@
-<h1>プロフィール編集</h1>
+<h2>プロフィール編集</h2>
+<%= form_with model: @general_user do |f| %>
+
+<div class="field">
+<%= f.file_field :profile_image, placeholder:"プロフィール画像", accept: "image/*" %>
+</div>
+
+<div class="field">
+    <%= f.label :姓 %><br>
+    <%= f.text_field :last_name, autofocus: true, placeholder: "姓" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :名 %><br>
+    <%= f.text_field :first_name, autofocus: true, placeholder: "名"  %>
+    </div>
+
+  <div class="field">
+    <%= f.label :セイ %><br>
+    <%= f.text_field :kana_last_name, autofocus: true, placeholder: "セイ" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :メイ %><br>
+    <%= f.text_field :kana_first_name, autofocus: true, placeholder: "メイ" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :メールアドレス %><br>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレス" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :パスワード %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> 文字以上)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password", placeholder: "新しいパスワードを入力" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :パスワード（確認用） %><br>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "確認のためもう一度入力" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "変更を保存" %>
+  </div>
+<% end %>

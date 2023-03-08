@@ -1,7 +1,7 @@
 <!--一般ユーザーの詳細-->
 <div>
-  <h3><%= @general_user.last_name %><%= @general_user.first_name %></h3>
   <%= image_tag @general_user.get_profile_image(100,100) %>
+  <h3><%= @general_user.last_name %><%= @general_user.first_name %></h3>
 </div>
 
 <!--一般ユーザーの投稿一覧-->
@@ -15,4 +15,9 @@
   <p>本文: <%= post.posted_text %></p>
   <p>投稿日時: <%= post.created_at.strftime("%Y/%m/%d %H:%M:%S") %></p>
 </div>
+<% end %>
+
+<!--ログインしているユーザー本人のみ編集リンクを表示させる-->
+<% if @general_user == current_general_user %>
+  <P><%= link_to "プロフィールを編集", edit_general_user_path(@general_user.id) %></P>
 <% end %>
