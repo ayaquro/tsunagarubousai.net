@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   scope module: :general_user do
     resources :posts, only: [:new, :create, :index, :edit, :show, :update, :destroy] do
+      resource :dangers, only: [:create, :destroy] #1つの投稿に1dangerしかできないため、単数形のresource
       resources :posted_comments, only: [:create, :destroy]
     end
     resources :general_users, only: [:show, :edit, :update]

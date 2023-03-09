@@ -1,7 +1,9 @@
 class Post < ApplicationRecord
+
   has_one_attached :posted_image
   belongs_to :general_user
   has_many :posted_comments, dependent: :destroy
+  has_many :dangers, dependent: :destroy
 
   def get_image #ここで指定したget_imageメソッドを、viewの画像のところで使う。
     unless posted_image.attached?
@@ -9,5 +11,9 @@ class Post < ApplicationRecord
       posted_image.attach(io:File.open(file_path),filename: 'default-image.jpg', content_type: 'image/jpeg') #.attachの前はカラム名。以降は定型文みたいなもの。
     end
     posted_image #カラム名
+  end
+  #引数で渡されたgeneral_user.idがdangersテーブル内に存在するか調べる
+  def dangered_by?(general_user)
+    dangers.exists?(general_user_id: general_user.id)
   end
 end

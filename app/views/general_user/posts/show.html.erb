@@ -1,17 +1,36 @@
 <h1>投稿詳細</h1>
 <div>
-<%= image_tag @post.get_image %>
-<p>地区</p>
-<p>タイトル: <%= @post.posted_title %></p>
-<P>本文: <%= @post.posted_text %></p>
-<p><%= image_tag @post.general_user.get_profile_image(100,100) %></p> #投稿者画像
-<p>投稿者: <%= @post.general_user.last_name %><%= @post.general_user.first_name %></p>
-<p>投稿日時:<%= @post.created_at.strftime("%Y/%m/%d %H:%M:%S") %></p>
-<!--編集も削除も投稿したユーザー以外はできないようにする-->
-<% if @post.general_user == current_general_user %>
-<%= link_to "編集", edit_post_path(@post.id) %>
-<%= link_to "削除", post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-<% end %>
+  <%= image_tag @post.get_image %>
+  <p>地区</p>
+  <p>タイトル: <%= @post.posted_title %></p>
+  <P>本文: <%= @post.posted_text %></p>
+  <!--投稿者画像-->
+  <p><%= image_tag @post.general_user.get_profile_image(50,50) %></p>
+  <p>投稿者: <%= @post.general_user.last_name %><%= @post.general_user.first_name %></p>
+  <p>投稿日時:<%= @post.created_at.strftime("%Y/%m/%d %H:%M:%S") %></p>
+
+  <!--編集も削除も投稿したユーザー以外はできないようにする-->
+  <% if @post.general_user == current_general_user %>
+    <%= link_to "編集", edit_post_path(@post.id) %>
+    <%= link_to "削除", post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+  <% end %>
+
+  <!--危険マーク-->
+  <% if @post.dangered_by?(current_general_user) %>
+    <p>
+      <%= link_to post_dangers_path(@post), method: :delete do %>
+        <!--FontAwesomeの危険マーク(押した後)-->
+        <i class="fas fa-exclamation-triangle text-danger"></i><%= @post.dangers.count %>キケン
+      <% end %>
+    </p>
+  <% else %>
+    <p>
+      <%= link_to post_dangers_path(@post), method: :post do %>
+        <!--FontAwesomeの危険マーク（押す前）-->
+        <i class="fas fa-exclamation-triangle text-secondary"></i><%= @post.dangers.count %>キケン
+      <% end %>
+    </p>
+  <% end %>
 </div>
 
 <div>
@@ -25,13 +44,14 @@
     <!--コメントがログインユーザーのものであれば削除ボタンを表示-->
     <% if posted_comment.general_user == current_general_user %>
       <%= link_to "削除", post_posted_comment_path(posted_comment.post,posted_comment), method: :delete %>
+    <% end %>
   <% end %>
 </div>
 
 <div>
   <!--コメントは、postに結びついたposted_commentのため、インスタンス変数を2つ指定-->
   <%= form_with model: [@post, @posted_comment] do |f| %>
-    <%= f.text_area :comment, rows: '5',placeholder: "コメントをここに" %>
+    <%= f.text_area :posted_comment, rows: '3',placeholder: "コメントをここに" %>
     <%= f.submit "投稿する" %>
   <% end %>
 </div>
