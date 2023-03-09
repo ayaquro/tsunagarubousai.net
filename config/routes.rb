@@ -20,7 +20,9 @@ Rails.application.routes.draw do
   root to: "homes#top"
 
   scope module: :general_user do
-    resources :posts, only: [:new, :create, :index, :edit, :show, :update, :destroy]
+    resources :posts, only: [:new, :create, :index, :edit, :show, :update, :destroy] do
+      resources :posted_comments, only: [:create, :destroy]
+    end
     resources :general_users, only: [:show, :edit, :update]
   end
 

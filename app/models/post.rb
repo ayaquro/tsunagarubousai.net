@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
   has_one_attached :posted_image
   belongs_to :general_user
+  has_many :posted_comments, dependent: :destroy
 
   def get_image #ここで指定したget_imageメソッドを、viewの画像のところで使う。
     unless posted_image.attached?

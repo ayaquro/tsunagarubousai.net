@@ -22,6 +22,7 @@ class GeneralUser::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @posted_comment = PostedComment.new
   end
 
   def update
