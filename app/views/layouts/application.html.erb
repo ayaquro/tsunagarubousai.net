@@ -12,7 +12,19 @@
 
   <body>
     <header>
-      <% if general_user_signed_in? %>
+      <!--管理者がログイン状態の時-->
+      <% if staff_signed_in? %>
+      <il>
+        <%= link_to "投稿一覧", staff_posts_path %>
+      </il>
+      <il>
+        <%= link_to "会員一覧", staff_general_users_path %>
+      </il>
+      <il>
+        <%= link_to "ログアウト", destroy_staff_session_path, method: :delete %>
+      </il>
+      <!--一般ユーザーがログイン状態の時-->
+      <% elsif general_user_signed_in? %>
       <il>
         <%= link_to "危険箇所の投稿", new_post_path %>
       </il>
@@ -22,6 +34,7 @@
       <il>
         <%= link_to "ログアウト", destroy_general_user_session_path, method: :delete %>
       </il>
+      <!--ログアウト状態の時-->
       <% else %>
       <il>
         <%= link_to "新規会員登録", new_general_user_registration_path %>

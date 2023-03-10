@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  namespace :general_user do
-    get "general_users/show"
-    get "general_users/edit"
-  end
   # 一般ユーザー用
   # URL /general_users/sign_in ...
   # コントローラーがどこに存在するか記述
@@ -20,7 +16,7 @@ Rails.application.routes.draw do
   }
 
   root to: "homes#top"
-
+  #会員側のルーティング設定
   scope module: :general_user do
     resources :posts, only: [:new, :create, :index, :edit, :show, :update, :destroy] do
       resource :dangers, only: [:create, :destroy] # 1つの投稿に1dangerしかできないため、単数形のresource
@@ -28,9 +24,11 @@ Rails.application.routes.draw do
     end
     resources :general_users, only: [:show, :edit, :update]
   end
+  #管理者側のルーティング設定
+  namespace :staff do
+    resources :general_users, only: [:index, :show, :edit, :update]
+    resources :posts, only: [:index, :show, :edit, :update]
+    end
 
-  # namespace :staff do
-
-  # end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -1,0 +1,13 @@
+<h1>会員一覧</h1>
+
+<% @general_users.each do |general_user| %>
+<p>会員ID</p>
+<span><%= general_user.id %></span>
+<P>氏名</P>
+<%= general_user.last_name %><%= general_user.first_name %>
+<p>フリガナ</p>
+<%= general_user.kana_last_name %><%= general_user.kana_first_name %>
+<P>メールアドレス</P>
+<%= general_user.email %>
+
+<% end %>
