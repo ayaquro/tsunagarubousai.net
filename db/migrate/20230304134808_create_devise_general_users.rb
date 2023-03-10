@@ -4,13 +4,13 @@ class CreateDeviseGeneralUsers < ActiveRecord::Migration[6.1]
   def change
     create_table :general_users do |t|
       ## Database authenticatable
-      t.string :last_name,null: false
-      t.string :first_name,null: false
-      t.string :kana_last_name,null: false
-      t.string :kana_first_name,null: false
+      t.string :last_name, null: false
+      t.string :first_name, null: false
+      t.string :kana_last_name, null: false
+      t.string :kana_first_name, null: false
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
-      t.integer :registration_status, null: false, default:0
+      t.integer :registration_status, null: false, default: 0
 
       ## Recoverable
       t.string   :reset_password_token

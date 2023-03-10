@@ -1,5 +1,6 @@
-class GeneralUser::DangersController < ApplicationController
+# frozen_string_literal: true
 
+class GeneralUser::DangersController < ApplicationController
   def create
     post = Post.find(params[:post_id])
     danger = current_general_user.dangers.new(post_id: post.id)
