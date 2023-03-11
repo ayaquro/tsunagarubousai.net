@@ -8,13 +8,13 @@
   <p><%= image_tag @post.general_user.get_profile_image(50,50) %></p>
   <p>投稿者: <%= @post.general_user.last_name %><%= @post.general_user.first_name %></p>
   <p>投稿日時:<%= @post.created_at.strftime("%Y/%m/%d %H:%M:%S") %></p>
-  
+
   <%= link_to "編集", edit_staff_post_path(@post.id) %>
   <%= link_to "削除", staff_post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
 
   <!--危険マーク-->
-        <!--FontAwesomeの危険マーク(押した後)-->
-        <i class="fas fa-exclamation-triangle text-danger"></i><%= @post.dangers.count %>キケン
+  <!--FontAwesomeの危険マーク(押した後)-->
+  <i class="fas fa-exclamation-triangle text-danger"></i><%= @post.dangers.count %>キケン
 </div>
 
 <div>
@@ -24,7 +24,7 @@
     <%= posted_comment.general_user.last_name %><%= posted_comment.general_user.first_name %>
     <%= posted_comment.posted_comment %>
     <%= posted_comment.created_at.strftime("%Y/%m/%d %H:%M:%S") %>
-    
-    <%= link_to "削除", post_posted_comment_path(posted_comment.post,posted_comment), method: :delete %>
+
+    <%= link_to "削除", staff_post_posted_comment_path(posted_comment.post,posted_comment), method: :delete, "data-confirm" => "本当に削除しますか？" %>
   <% end %>
 </div>

@@ -1,0 +1,21 @@
+<h1>コメント一覧</h1>
+<table>
+  <tr>
+    <th>コメントID</th>
+    <th>コメント日時</th>
+    <th>投稿者</th>
+    <th>コメント</th>
+    <th></th>
+    <th></th>
+  </tr>
+<% @posted_comments.each do |posted_comment| %>
+  <tr>
+    <td><%= posted_comment.id %></td>
+    <td><%= posted_comment.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+    <td><%= posted_comment.general_user.last_name %><%= posted_comment.general_user.first_name %></td>
+    <td><%= posted_comment.posted_comment %></td>
+    <td><%= link_to "詳細", staff_post_path(post.id) %></td>
+    <td><%= link_to "削除", staff_post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
+  </tr>
+  <% end %>
+</table>

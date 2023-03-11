@@ -1,0 +1,2 @@
+module Staff::PostedCommentsHelper
+end

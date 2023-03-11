@@ -22,8 +22,8 @@
           <% end %>
     </td>
     <td><%= post.general_user.last_name %><%= post.general_user.first_name %></td>
-    <td><%= link_to "#{post.posted_comments.count} コメント", post_path(post.id) %></td>
-    <td><%= link_to "#{post.dangers.count}キケン", post_path(post.id) %></td>
+    <td><%= link_to "#{post.posted_comments.count} コメント", staff_post_path(post.id) %></td>
+    <td><%= link_to "#{post.dangers.count}キケン", staff_post_path(post.id) %></td>
     <td><%= link_to "詳細", staff_post_path(post.id) %></td>
     <td><%= link_to "削除", staff_post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
   </tr>
