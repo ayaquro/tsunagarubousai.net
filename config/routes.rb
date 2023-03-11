@@ -27,7 +27,8 @@ Rails.application.routes.draw do
   #管理者側のルーティング設定
   namespace :staff do
     resources :general_users, only: [:index, :show, :edit, :update]
-    resources :posts, only: [:index, :show, :edit, :update]
+    resources :posts, only: [:index, :show, :edit, :update, :destroy]
+    resources :districts, only: [:index, :create, :edit, :update]
     end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

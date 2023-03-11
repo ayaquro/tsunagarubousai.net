@@ -1,2 +1,30 @@
-<h1>Staff::Posts#show</h1>
-<p>Find me in app/views/staff/posts/show.html.erb</p>
+<h1>投稿詳細</h1>
+<div>
+  <%= image_tag @post.get_image(300,300) %>
+  <p>地区</p>
+  <p>タイトル: <%= @post.posted_title %></p>
+  <P>本文: <%= @post.posted_text %></p>
+  <!--投稿者画像-->
+  <p><%= image_tag @post.general_user.get_profile_image(50,50) %></p>
+  <p>投稿者: <%= @post.general_user.last_name %><%= @post.general_user.first_name %></p>
+  <p>投稿日時:<%= @post.created_at.strftime("%Y/%m/%d %H:%M:%S") %></p>
+  
+  <%= link_to "編集", edit_staff_post_path(@post.id) %>
+  <%= link_to "削除", staff_post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+
+  <!--危険マーク-->
+        <!--FontAwesomeの危険マーク(押した後)-->
+        <i class="fas fa-exclamation-triangle text-danger"></i><%= @post.dangers.count %>キケン
+</div>
+
+<div>
+  <p>コメント件数:<%= @post.posted_comments.count %></p>
+  <% @post.posted_comments.each do |posted_comment| %>
+    <p><%= image_tag posted_comment.general_user.get_profile_image(50,50) %></p>
+    <%= posted_comment.general_user.last_name %><%= posted_comment.general_user.first_name %>
+    <%= posted_comment.posted_comment %>
+    <%= posted_comment.created_at.strftime("%Y/%m/%d %H:%M:%S") %>
+    
+    <%= link_to "削除", post_posted_comment_path(posted_comment.post,posted_comment), method: :delete %>
+  <% end %>
+</div>

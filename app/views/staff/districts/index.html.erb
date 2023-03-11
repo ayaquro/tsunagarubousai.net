@@ -1,0 +1,20 @@
+<h1>地区一覧・新規登録</h1>
+<%= form_with model: @district, url: staff_districts_path, method: :post do |f| %>
+<h4>新規地区名</h4>
+  <%= f.text_field :district_name %>
+  <%= f.submit '新規登録' %>
+<% end %>
+
+<h4>地区一覧</h4>
+<table>
+  <tr>
+    <th>地区名</th>
+    <th></th>
+  </tr>
+<% @districts.each do |district| %>
+  <tr>
+  <td><%= district.district_name %></td>
+  <td><%= link_to "編集", edit_staff_district_path(district.id) %></td>
+  </tr>
+<% end %>
+</table>
