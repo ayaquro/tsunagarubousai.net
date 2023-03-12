@@ -8,7 +8,7 @@
   <!--画像ファイルしか投稿できないようにaccept: "image/*"を記載-->
 
 <h4>当該地区の選択</h4>
-  <%= f.collection_select :district_id, @districts, :id, :district_name, {include_blank: "---"} %>
+  <%= f.collection_select(:district_id, @districts, :id, :district_name, {include_blank: "---"}) %>
 
 <h4>タイトル</h4>
 <%= f.text_field :posted_title %>

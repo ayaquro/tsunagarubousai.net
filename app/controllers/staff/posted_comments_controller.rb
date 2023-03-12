@@ -1,5 +1,6 @@
 class Staff::PostedCommentsController < ApplicationController
   def index
+    @posted_comments = PostedComment.all
   end
 
   def destroy

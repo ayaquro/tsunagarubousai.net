@@ -24,7 +24,6 @@
     <%= posted_comment.general_user.last_name %><%= posted_comment.general_user.first_name %>
     <%= posted_comment.posted_comment %>
     <%= posted_comment.created_at.strftime("%Y/%m/%d %H:%M:%S") %>
-
     <%= link_to "削除", staff_post_posted_comment_path(posted_comment.post,posted_comment), method: :delete, "data-confirm" => "本当に削除しますか？" %>
   <% end %>
 </div>

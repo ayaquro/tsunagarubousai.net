@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  namespace :staff do
-    get 'posted_comments/index'
-    get 'posted_comments/destroy'
-  end
   # 一般ユーザー用
   # URL /general_users/sign_in ...
   # コントローラーがどこに存在するか記述
@@ -33,7 +29,8 @@ Rails.application.routes.draw do
     resources :general_users, only: [:index, :show, :edit, :update]
     resources :districts, only: [:index, :create, :edit, :update]
     resources :posts, only: [:index, :show, :edit, :update, :destroy] do
-      resources :posted_comments, only: [:index, :destroy]
+      resource :posted_comments, only: [:index]
+      resources :posted_comments, only: [:destroy]
     end
   end
 
