@@ -17,6 +17,9 @@ class GeneralUser::PostsController < ApplicationController
 
   def index
     @posts = Post.all
+    @posts = @posts.where(district_id: params[:district_ids]) if params[:district_ids].compact_blank.any?
+    @posts = @posts.where('posted_title like ?', "%#{params[:keyword]}%").or(@posts.where('posted_text like ?', "%#{params[:keyword]}%")) if params[:keyword].present?
+    @districts = District.all
   end
 
   def edit

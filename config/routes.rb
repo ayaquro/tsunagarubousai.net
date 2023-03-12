@@ -29,9 +29,9 @@ Rails.application.routes.draw do
     resources :general_users, only: [:index, :show, :edit, :update]
     resources :districts, only: [:index, :create, :edit, :update]
     resources :posts, only: [:index, :show, :edit, :update, :destroy] do
-      resource :posted_comments, only: [:index]
-      resources :posted_comments, only: [:destroy]
+      resources :posted_comments, only: [ :destroy]
     end
+    resources :posted_comments, only: [:index]
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

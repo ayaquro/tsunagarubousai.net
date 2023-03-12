@@ -15,7 +15,7 @@
     <td><%= posted_comment.general_user.last_name %><%= posted_comment.general_user.first_name %></td>
     <td><%= posted_comment.posted_comment %></td>
     <td><%= link_to "投稿詳細", staff_post_path(posted_comment.post.id) %></td>
-    <td><%= link_to "削除", staff_posted_comments_destroy_path(posted_comment.post.id,posted_comment.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
+    <td><%= link_to "削除", staff_post_posted_comment_path(posted_comment.post.id,posted_comment.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
   </tr>
   <% end %>
 </table>
