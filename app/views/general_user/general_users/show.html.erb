@@ -20,7 +20,7 @@
 <% end %>
 
 
-<!--ログインしているユーザー本人のみ編集リンクを表示させる-->
-<% if @general_user == current_general_user %>
+<!--ゲストログイン以外で、ログインしているユーザー本人のみ編集リンクを表示させる-->
+<% (if @general_user == current_general_user) && (@general_user.last_name != "ゲスト") %>
   <P><%= link_to "プロフィールを編集", edit_general_user_path(@general_user.id) %></P>
 <% end %>

@@ -28,4 +28,13 @@ class GeneralUser < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [width, height]).processed # メソッドに対し引数を設定し、引数に設定した値に画像サイズを変換するようにした
   end
+
+  #ゲストログイン機能
+  def self.guest
+    find_or_create_by!(email: 'guest@user') do |general_user|
+      general_user.password = SecureRandom.urlsafe_base64
+      general_user.last_name = "ゲスト"
+      general_user.first_name = "ユーザー"
+    end
+  end
 end

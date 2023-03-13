@@ -9,6 +9,11 @@ Rails.application.routes.draw do
     sessions: "general_user/sessions"
   }
 
+  #ゲストログイン用
+  devise_scope :general_user do
+    post 'general_user/guest_sign_in', to: 'general_user/sessions#guest_sign_in'
+  end
+
   # 自治体職員用
   # URL /staff/sign_in...
   devise_for :staffs, skip: [:registrations, :passwords], controllers: {
