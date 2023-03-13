@@ -6,6 +6,10 @@ class Post < ApplicationRecord
   has_many :posted_comments, dependent: :destroy
   has_many :dangers, dependent: :destroy
 
+  validates :district_id, presence: true
+  validates :posted_title, presence: true
+  validates :posted_text, presence: true
+  validates :posted_image, presence: true
 
   def get_image(width, height) #ここで指定したget_imageメソッドを、viewの画像のところで使う。
     unless posted_image.attached?

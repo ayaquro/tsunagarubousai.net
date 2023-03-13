@@ -1,7 +1,7 @@
 <h1>投稿詳細</h1>
 <div>
   <%= image_tag @post.get_image(300,300) %>
-  <p>地区</p>
+  <p>地区:<%= @post.district.district_name %></p>
   <p>タイトル: <%= @post.posted_title %></p>
   <P>本文: <%= @post.posted_text %></p>
   <!--投稿者画像-->

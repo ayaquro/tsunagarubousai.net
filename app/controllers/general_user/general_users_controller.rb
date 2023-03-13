@@ -13,8 +13,11 @@ class GeneralUser::GeneralUsersController < ApplicationController
 
   def update
     @general_user = GeneralUser.find(params[:id])
-    @general_user.update(general_user_params)
-    redirect_to general_user_path # 一般ユーザーマイページ（詳細ページ）にリダイレクト
+    if @general_user.update(general_user_params)
+      redirect_to general_user_path # 一般ユーザーマイページ（詳細ページ）にリダイレクト
+    else
+      render :edit
+    end
   end
 
   private

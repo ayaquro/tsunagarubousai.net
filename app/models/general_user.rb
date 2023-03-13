@@ -12,6 +12,14 @@ class GeneralUser < ApplicationRecord
   has_one_attached :profile_image
 
   enum registration_status: { registering: 0, in_suspend: 1, unsubscribe: 2 }
+                                #0:登録中、1：利用停止中、2：退会
+
+  validates :last_name, presence: true
+  validates :first_name, presence: true
+  validates :kana_last_name, presence: true
+  validates :kana_first_name, presence: true
+  validates :email, presence: true
+  validates :encrypted_password, presence: true
 
   def get_profile_image(width, height) # viewでサイズを指定しているので、(width,height)を入れないとArgumentErrorになる
     unless profile_image.attached?

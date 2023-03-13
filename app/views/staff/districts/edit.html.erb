@@ -1,4 +1,12 @@
 <h1>地区の編集</h1>
+<% if @district.errors.any? %>
+  <%= @district.errors.count %>件のエラーが発生しました。
+  <ul>
+    <% @district.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
   <%= form_with model: @district, url: staff_district_path(@district.id), method: :patch do |f| %>
 <h4>地区名</h4>
   <%= f.text_field :district_name %>

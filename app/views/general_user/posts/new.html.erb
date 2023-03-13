@@ -1,4 +1,12 @@
 <h1>危険箇所の新規投稿</h1>
+<% if @post.errors.any? %>
+  <%= @post.errors.count %>件のエラーが発生しました。
+  <ul>
+    <% @post.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+  <% end %>
   <!-- form_with部分 -->
   <%#= form_with model: @post, url: '/posts',method: :post do |f| %>
   <%= form_with model: @post do |f| %>
@@ -8,6 +16,7 @@
   <!--画像ファイルしか投稿できないようにaccept: "image/*"を記載-->
 
 <h4>当該地区の選択</h4>
+  <%# byebug %>
   <%= f.collection_select(:district_id, @districts, :id, :district_name, {include_blank: "---"}, {}) %>
 
 <h4>タイトル</h4>

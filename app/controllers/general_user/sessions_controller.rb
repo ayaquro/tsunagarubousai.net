@@ -8,6 +8,8 @@ class GeneralUser::SessionsController < Devise::SessionsController
   def after_sign_in_path_for(resource) # ログインしたら投稿一覧に遷移
     posts_path
   end
+  
+  
 
   # POST /resource/sign_in
   # def create

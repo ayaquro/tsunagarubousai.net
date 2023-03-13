@@ -5,8 +5,10 @@ class GeneralUser::PostedCommentsController < ApplicationController
     post = Post.find(params[:post_id])
     comment = current_general_user.posted_comments.new(posted_comment_params)
     comment.post_id = post.id
-    comment.save
-    redirect_to post_path(post)
+    if comment.save
+      redirect_to post_path(post)
+    else render post_path(post)
+    end
   end
 
   def destroy

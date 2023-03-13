@@ -1,4 +1,12 @@
 <h2>プロフィール編集</h2>
+<% if @general_user.errors.any? %>
+  <%= @general_user.errors.count %>件のエラーが発生しました。
+  <ul>
+    <% @general_user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
 <%= form_with model: @general_user do |f| %>
 
 <div class="field">

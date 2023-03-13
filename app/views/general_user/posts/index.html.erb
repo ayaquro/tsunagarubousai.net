@@ -1,6 +1,8 @@
 <h1>危険箇所投稿一覧</h1>
+  <!--キーワード検索窓-->
   <%= form_with url: posts_path, method: :get, local: true do |f| %>
   <%= f.text_field :keyword, value: params[:keyword] %>
+  <!--タグ検索チェックボックス-->
    <%#= f.collection_select(:district_id, @districts, :id, :district_name, {include_blank: "---", selected: params[:district_id]}, {}) %>
   <%= f.collection_check_boxes(:district_ids, @districts, :id, :district_name, {checked: params[:district_ids]}) do |b| %>
     <%= b.label { b.check_box + b.text } %>
@@ -20,20 +22,21 @@
   </tr>
 <% @posts.each do |post| %>
   <tr>
-    <td><%= post.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
-    <td><%= post.district_id %></td>
-    <td><%= post.posted_title %></td>
-    <td><%= link_to post_path(post.id) do %>
-          <%= image_tag post.get_image(100,100) %>
+      <td><%= post.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+      <td><%= post.district.district_name %></td>
+      <td><%= post.posted_title %></td>
+      <td><%= link_to post_path(post.id) do %>
+            <%= image_tag post.get_image(100,100) %>
+            <% end %>
+      </td>
+      <td><%= post.general_user.last_name %><%= post.general_user.first_name %></td>
+      <td><%= link_to "#{post.posted_comments.count} コメント", post_path(post.id) %></td>
+      <td><%= link_to "#{post.dangers.count}キケン", post_path(post.id) %></td>
+      <td><%= link_to "詳細", post_path(post.id) %></td>
+      <td><% if post.general_user == current_general_user %>
+            <%= link_to "削除", post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
           <% end %>
-    </td>
-    <td><%= post.general_user.last_name %><%= post.general_user.first_name %></td>
-    <td><%= link_to "#{post.posted_comments.count} コメント", post_path(post.id) %></td>
-    <td><%= link_to "#{post.dangers.count}キケン", post_path(post.id) %></td>
-    <td><%= link_to "詳細", post_path(post.id) %></td>
-    <% if post.general_user == current_general_user %>
-      <%= link_to "削除", post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
-    <% end %>
+      </td>
   </tr>
   <% end %>
 </table>

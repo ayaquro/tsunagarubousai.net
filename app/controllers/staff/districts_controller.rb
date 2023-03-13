@@ -6,8 +6,11 @@ class Staff::DistrictsController < ApplicationController
 
   def create
     district = District.new(district_params)
-    district.save
-    redirect_to request.referer #遷移元のページにリダイレクト
+    if district.save
+      redirect_to request.referer #遷移元のページにリダイレクト
+    else
+      render :index
+    end
   end
 
   def edit
@@ -16,8 +19,11 @@ class Staff::DistrictsController < ApplicationController
 
   def update
     district = District.find(params[:id])
-    district.update(district_params)
-    redirect_to staff_districts_path
+    if district.update(district_params)
+      redirect_to staff_districts_path
+    else
+      render :edit
+    end
   end
 
   private
