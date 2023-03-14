@@ -3,6 +3,7 @@
 class GeneralUser::SessionsController < Devise::SessionsController
    #before_action :configure_sign_in_params, only: [:create]
   #before_action :general_user_state, only: [:create]
+  before_action :reject_general_user, only: [:create]
   # GET /resource/sign_in
 
   def after_sign_in_path_for(resource) # ログインしたら投稿一覧に遷移
@@ -25,18 +26,18 @@ class GeneralUser::SessionsController < Devise::SessionsController
   # def destroy
   #   super
   # end
-
+  protected
   #会員の論理削除のための記述。退会後は同じアカウントでは利用できない。
   def reject_general_user
     @general_user = GeneralUser.find_by(email: params[:general_user][:email])
-    if @general_user
-      if @general_user.valid_password?(params[:general_user][:email]) && (@general_user.is_deleted == false)
+    #if @general_user
+      if @general_user.valid_password?(params[:general_user][:password]) && (@general_user.is_deleted == true)
         flash[:notice] = "退会済です。再度会員登録をしてご利用ください。"
         redirect_to  new_general_user_registration_path #新規会員登録画面に遷移
       else
         flash[:notice] = "項目を入力してください。"
       end
-    end
+    #end
   end
 
   #protected
