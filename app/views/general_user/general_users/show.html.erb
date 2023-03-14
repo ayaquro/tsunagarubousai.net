@@ -11,16 +11,15 @@
   <%= link_to post_path(post.id) do %>
     <%= image_tag post.get_image(100,100) %>
   <% end %>
-  <p>地区</p>
+  <p>地区<%= post.district.district_name %></p>
   <P>タイトル: <%= post.posted_title %></p>
   <p>本文: <%= post.posted_text %></p>
   <p>投稿日時: <%= post.created_at.strftime("%Y/%m/%d %H:%M:%S") %></p>
   <p><%= link_to "#{post.posted_comments.count} コメント", post_path(post.id) %></p>
 </div>
 <% end %>
-
-
-<!--ゲストログイン以外で、ログインしているユーザー本人のみ編集リンクを表示させる-->
-<% (if @general_user == current_general_user) && (@general_user.last_name != "ゲスト") %>
-  <P><%= link_to "プロフィールを編集", edit_general_user_path(@general_user.id) %></P>
+<!--ログインしているユーザー本人のみ編集リンクを表示させる-->
+<% if @general_user == current_general_user %>
+  <p><%= link_to "プロフィールを編集", edit_general_user_path(@general_user.id) %></p>
+  <p><%= link_to "退会する", confirm_path %></p>
 <% end %>

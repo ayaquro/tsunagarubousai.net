@@ -23,11 +23,16 @@ Rails.application.routes.draw do
   root to: "homes#top"
   #会員側のルーティング設定
   scope module: :general_user do
+    #退会確認画面
+    get '/confirm' => 'general_users#confirm', as: 'confirm'
+    #論理削除用のルーティング
+    patch '/unsubscribe' => 'general_users#unsubscribe', as: 'unsubscribe'
     resources :posts, only: [:new, :create, :index, :edit, :show, :update, :destroy] do
       resource :dangers, only: [:create, :destroy] # 1つの投稿に1dangerしかできないため、単数形のresource
       resources :posted_comments, only: [:create, :destroy]
     end
     resources :general_users, only: [:show, :edit, :update]
+
   end
   #管理者側のルーティング設定
   namespace :staff do

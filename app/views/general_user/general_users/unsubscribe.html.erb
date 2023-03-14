@@ -1,0 +1,8 @@
+<h2>退会しますか？</h2>
+<P>
+  退会手続きをされますと、画像やコメントの投稿がご利用いただけなくなります。
+  再度ご利用いただく際は、新規登録が必要になります。
+  本当に退会してよろしいですか？
+</P>
+<%= link_to "はい、退会します",withdrawal_path, method: :patch, data: { confirm: "本当に退会しますか？" } %>
+<%= link_to "いいえ、退会しません", general_user_path(current_general_user) %>
