@@ -32,7 +32,7 @@ class GeneralUser::GeneralUsersController < ApplicationController
 
   private
     def general_user_params
-      params.require(:general_user).permit(:profile_image, :last_name, :first_name, :kana_last_name, :kana_first_name)
+      params.require(:general_user).permit(:profile_image, :last_name, :first_name, :kana_last_name, :kana_first_name, :email, :is_deleted)
     end
 
     def ensure_guest_user

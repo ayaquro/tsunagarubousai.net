@@ -1,7 +1,9 @@
 <!--一般ユーザーの詳細-->
 <div>
   <%= image_tag @general_user.get_profile_image(300,300) %>
-  <h3><%= @general_user.last_name %><%= @general_user.first_name %></h3>
+  <h5><%= @general_user.last_name %><%= @general_user.first_name %></h5>
+  <h5><%= @general_user.kana_last_name %><%= @general_user.kana_first_name %></h5>
+  <h5><%= @general_user.email %></h5>
 </div>
 
 <!--一般ユーザーの投稿一覧-->
@@ -19,7 +21,7 @@
 </div>
 <% end %>
 <!--ログインしているユーザー本人のみ編集リンクを表示させる-->
-<% if @general_user == current_general_user %>
+<%# if @general_user == current_general_user %>
   <p><%= link_to "プロフィールを編集", edit_general_user_path(@general_user.id) %></p>
   <p><%= link_to "退会する", confirm_path %></p>
-<% end %>
+<%# end %>

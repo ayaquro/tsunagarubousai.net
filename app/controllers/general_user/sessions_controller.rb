@@ -6,15 +6,19 @@ class GeneralUser::SessionsController < Devise::SessionsController
   before_action :reject_general_user, only: [:create]
   # GET /resource/sign_in
 
-  def after_sign_in_path_for(resource) # ログインしたら投稿一覧に遷移
-    posts_path
+  def after_sign_in_path_for(resource) 
+    about_path  # ログインしたらアバウトページに遷移
+  end
+  
+  def after_sign_out_path_for(resource)
+    root_path # ログアウトしたらTOPページに遷移
   end
 
   #ゲストログイン機能
   def guest_sign_in
     general_user = GeneralUser.guest
     sign_in general_user
-    redirect_to posts_path, notice: 'ゲストユーザーとしてログインしました。'
+    redirect_to about_path, notice: 'ゲストユーザーとしてログインしました。'
   end
 
   # POST /resource/sign_in
@@ -29,15 +33,15 @@ class GeneralUser::SessionsController < Devise::SessionsController
   protected
   #会員の論理削除のための記述。退会後は同じアカウントでは利用できない。
   def reject_general_user
+    #emailアドレスで会員を特定
     @general_user = GeneralUser.find_by(email: params[:general_user][:email])
-    #if @general_user
+      #パスワードが正しいか確認し、かつis_deletedがtrue⇒退会状態、なのか確認
       if @general_user.valid_password?(params[:general_user][:password]) && (@general_user.is_deleted == true)
         flash[:notice] = "退会済です。再度会員登録をしてご利用ください。"
         redirect_to  new_general_user_registration_path #新規会員登録画面に遷移
       else
         flash[:notice] = "項目を入力してください。"
       end
-    #end
   end
 
   #protected

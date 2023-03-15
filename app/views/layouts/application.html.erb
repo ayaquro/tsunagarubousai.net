@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>TsunagarubousaiNet</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,44 +10,69 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <header>
+  <body class="d-flex flex-column vh-100">
+    <header class="shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <a class="navbar-brand p-3" href="/"><%#= image_tag('logo.png') %></a>
+            <!--ハンバーガーメニュー-->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+              <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ml-auto">
       <!--管理者がログイン状態の時-->
       <% if staff_signed_in? %>
       <il>
-        <%= link_to "投稿一覧", staff_posts_path %>
+        <%= link_to "投稿一覧", staff_posts_path, class: 'nav-link text-dark' %>
       </il>
       <il>
-        <%= link_to "会員一覧", staff_general_users_path %>
+        <%= link_to "コメント一覧", staff_posted_comments_path, class: 'nav-link text-dark' %>
       </il>
       <il>
-        <%= link_to "地区一覧", staff_districts_path %>
+        <%= link_to "会員一覧", staff_general_users_path, class: 'nav-link text-dark' %>
       </il>
       <il>
-        <%= link_to "ログアウト", destroy_staff_session_path, method: :delete %>
+        <%= link_to "地区一覧", staff_districts_path, class: 'nav-link text-dark' %>
+      </il>
+      <il>
+        <%= link_to "ログアウト", destroy_staff_session_path, method: :delete, class: 'nav-link text-dark' %>
       </il>
       <!--一般ユーザーがログイン状態の時-->
       <% elsif general_user_signed_in? %>
       <il>
-        <%= link_to "危険箇所の投稿", new_post_path %>
+        <%= link_to "お知らせ", about_path, class: 'nav-link text-dark' %>
       </il>
       <il>
-        <%= link_to "マイページ", general_user_path(current_general_user.id) %>
+        <%= link_to "危険箇所の投稿", new_post_path, class: 'nav-link text-dark' %>
       </il>
       <il>
-        <%= link_to "ログアウト", destroy_general_user_session_path, method: :delete %>
+        <%= link_to "投稿一覧", posts_path, class: 'nav-link text-dark' %>
+      </il>
+      <il>
+        <%= link_to "マイページ", general_user_path(current_general_user.id), class: 'nav-link text-dark' %>
+      </il>
+      <il>
+        <%= link_to "ログアウト", destroy_general_user_session_path, method: :delete, class: 'nav-link text-dark' %>
       </il>
       <!--ログアウト状態の時-->
       <% else %>
       <il>
-        <%= link_to "新規会員登録", new_general_user_registration_path %>
+        <%= link_to "お知らせ", about_path, class: 'nav-link text-dark' %>
       </il>
       <il>
-        <%= link_to "ログイン", new_general_user_session_path %>
+        <%= link_to "新規会員登録", new_general_user_registration_path, class: 'nav-link text-dark' %>
+      </il>
+      <il>
+        <%= link_to "ログイン", new_general_user_session_path, class: 'nav-link text-dark' %>
       </il>
       <% end %>
+      </div>
+      </nav>
     </header>
-    <%= flash[:notice] %>
-    <%= yield %>
-  </body>
+      <main class="mb-auto">
+        <%= flash[:notice] %>
+        <%= yield %>
+      </main>
+    </body>
 </html>

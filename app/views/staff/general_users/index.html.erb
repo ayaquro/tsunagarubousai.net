@@ -1,13 +1,19 @@
 <h1>会員一覧</h1>
 
 <% @general_users.each do |general_user| %>
-<p>会員ID</p>
-<span><%= general_user.id %></span>
-<P>氏名</P>
-<%= general_user.last_name %><%= general_user.first_name %>
-<p>フリガナ</p>
-<%= general_user.kana_last_name %><%= general_user.kana_first_name %>
-<P>メールアドレス</P>
-<%= general_user.email %>
-
+  <p>会員ID</p>
+  <span><%= general_user.id %></span>
+  <P>氏名</P>
+  <%= general_user.last_name %><%= general_user.first_name %>
+  <p>フリガナ</p>
+  <%= general_user.kana_last_name %><%= general_user.kana_first_name %>
+  <p>メールアドレス</p>
+  <%= general_user.email %>
+  <p>ステータス</p>
+    <% if general_user.is_deleted == false %>
+      <span>有効</span>
+    <% else %>
+      <span>退会</span>
+    <% end %>
+  <%= link_to "詳細", staff_general_user_path(general_user) %>
 <% end %>
