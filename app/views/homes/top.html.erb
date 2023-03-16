@@ -1,14 +1,34 @@
-<h3>ようこそ、つながる防災.netへ。</h3>
-<h5>いずれかをクリックしてください。</h5>
-
-<div class = "row">
-  <%= link_to 'ゲストログイン（閲覧用）', general_user_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block mb-3 sign_in", method: :post %>
-</div>
-
-<div class = "row">
-  <%= link_to 'ログイン', general_user_session_path, class: "btn btn-info btn-sm btn-block mb-3 sign_in" %>
-</div>
-
-<div class = "row">
-  <%= link_to '新規登録', new_general_user_registration_path, class: "btn btn-success btn-sm btn-block sign_up" %>
+<div class="container mt-5">
+  <h1 class="row m-3 text-center">
+    ようこそ、つながる防災.netへ。
+  </h1>
+  <h3 class="row m-5">
+    いずれかをクリックしてください。
+  </h3>
+  <div class="row mt-5">
+    <div class="col-md-4">
+      <div class="card text-center border-danger">
+        <div class="card-body">
+          <h5 class="card-title m-5">登録せずに利用する方はこちら</h5>
+            <%= link_to 'ゲストログイン（閲覧用）', general_user_guest_sign_in_path, class: "btn btn-danger btn-sm btn-block mb-3 sign_in", method: :post %>
+        </div>
+      </div>
+    </div>
+    <div class = "col-md-4">
+      <div class="card text-center border-primary">
+        <div class="card-body">
+           <h5 class="card-title m-5">会員登録済の方はこちら</h5>
+              <%= link_to 'ログイン', general_user_session_path, class: "btn btn-primary btn-sm btn-block mb-3 sign_in" %>
+        </div>
+      </div>
+    </div>
+    <div class = "col-md-4">
+      <div class="card text-center border-success">
+        <div class="card-body">
+          <h5 class="card-title m-5">会員登録がまだの方はこちら</h5>
+            <%= link_to '新規登録', new_general_user_registration_path, class: "btn btn-success btn-sm btn-block sign_up" %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

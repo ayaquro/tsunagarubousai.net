@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+.img-fluid {
+  height: 300px;
+  overflow: hidden;
+}
