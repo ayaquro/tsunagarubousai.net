@@ -1,49 +1,49 @@
-<h2>新規会員登録</h2>
+<div class="container mt-5">
+  <h2>新規会員登録</h2>
 
-<%= form_with model: @general_user, url: general_user_registration_path, method: :post, local: true do |f| %>
-  <%#= render "shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :姓 %><br>
-    <%= f.text_field :last_name, autofocus: true, placeholder: "例）防災" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :名 %><br>
-    <%= f.text_field :first_name, autofocus: true, placeholder: "例）備子"  %>
+  <form>
+      <%= form_with model: @general_user, url: general_user_registration_path, method: :post, local: true do |f| %>
+      <%#= render "shared/error_messages", resource: resource %>
+    <div class="form-row mt-3">
+      <div class="form-group col-md-6">
+        <label for="last_name">姓</label>
+        <input type="last_name" class="form-control" id="last_name" placeholder="例）防災">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="first_name">名</label>
+        <input type="first_name" class="form-control" id="first_name" placeholder="例）備子">
+      </div>
     </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="kana_last_name">セイ</label>
+        <input type="kana_last_name" class="form-control" id="kana_last_name" placeholder="例）ボウサイ">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="kana_first_name">メイ</label>
+        <input type="kana_first_name" class="form-control" id="kana_first_name" placeholder="例）トモコ">
+      </div>
+    </div>
+      <div class="form-group">
+        <label for="email">メールアドレス</label>
+        <input type="email" class="form-control" id="email" placeholder="例）bousai@taisaku.com">
+      </div>
+      <div class="form-group">
+        <label for="password">パスワード</label>
+        <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> 文字以上)</em>
+        <% end %><br />
+        <input type="password" class="form-control" id="password" placeholder="ご自身で決めたパスワードを入力">
+      </div>
+      <div class="form-group">
+        <label for="password_confirmation">パスワード（確認用）</label>
+        <input type="password_confirmation" class="form-control" id="password_confirmation" placeholder="確認のためもう一度入力">
+      </div>
 
-  <div class="field">
-    <%= f.label :セイ %><br>
-    <%= f.text_field :kana_last_name, autofocus: true, placeholder: "例）ボウサイ" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :メイ %><br>
-    <%= f.text_field :kana_first_name, autofocus: true, placeholder: "例）トモコ" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :メールアドレス %><br>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "例）bousai@taisaku.com" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :パスワード %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> 文字以上)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password", placeholder: "ご自身で決めたパスワードを入力" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :パスワード（確認用） %><br>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "確認のためもう一度入力" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "新規登録" %>
-  </div>
-<% end %>
-
+      <button type="submit" class="btn btn-primary btn-lg">新規登録</button>
+    <% end %>
+<div class="row mt-3">
 ※すでに登録済の方はこちらから<%= render "general_user/shared/links" %>
+</div> 
+</form>
+</div>
