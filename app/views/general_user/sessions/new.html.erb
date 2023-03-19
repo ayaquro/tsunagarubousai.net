@@ -1,36 +1,31 @@
-<div class="container mt-5">
-  <div class="row no-gutters">
-    <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto text-center shadow-lg rounded px-0 my-5">
-      <h1 class="row m-3 text-center">
-        ログイン
-      </h1>
+<div class="container mt-5 p-5 card shadow-lg">
+  <h1 class="row m-3">
+    ログイン
+  </h1>
   <form>
      <%= form_with model: @general_user, url: general_user_session_path, local: true do |f| %>
-     <%#= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  
-    <div class="field">
-      <%= f.label :メールアドレス %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <div class="form-group">
+      <label for="email">メールアドレス</label>
+      <input type="email" class="form-control" id="email" placeholder="例）bousai@taisaku.example">
     </div>
-    <div class="field">
-      <%= f.label :パスワード %><br />
-      <%= f.password_field :password, autocomplete: "current-password" %>
+    <div class="form-group">
+      <label for="password">パスワード</label>
+          <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> 文字以上)</em>
+          <% end %><br />
+        <input type="password" class="form-control" id="password" placeholder="ご自身で決めたパスワードを入力">
     </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
+    <% if devise_mapping.rememberable? %>
+    <div class="form-group">
       <%= f.check_box :remember_me %>
       <%= f.label :remember_me %>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "ログイン" %>
-  </div>
-<% end %>
-※会員登録されていない方はこちらから<%= render "general_user/shared/links" %>
-</div>
-</form>
+    <% end %>
+    <button type="submit" class="btn btn-primary btn-lg">ログイン</button>
+    <% end %>
+    <div class="row mt-3">
+    ※会員登録されていない方はこちらから<%= render "general_user/shared/links" %>
     </div>
-  </div>
+  </form>
 </div>

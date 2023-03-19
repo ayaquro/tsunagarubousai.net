@@ -1,6 +1,7 @@
-<div class="container mt-5">
-  <h2>新規会員登録</h2>
-
+<div class="container mt-5 p-5 card shadow-lg">
+  <h1 class="row m-3">
+    新規会員登録
+  </h1>
   <form>
       <%= form_with model: @general_user, url: general_user_registration_path, method: :post, local: true do |f| %>
       <%#= render "shared/error_messages", resource: resource %>
@@ -24,26 +25,25 @@
         <input type="kana_first_name" class="form-control" id="kana_first_name" placeholder="例）トモコ">
       </div>
     </div>
-      <div class="form-group">
-        <label for="email">メールアドレス</label>
-        <input type="email" class="form-control" id="email" placeholder="例）bousai@taisaku.com">
-      </div>
-      <div class="form-group">
-        <label for="password">パスワード</label>
+    <div class="form-group">
+      <label for="email">メールアドレス</label>
+      <input type="email" class="form-control" id="email" placeholder="例）bousai@taisaku.example">
+    </div>
+    <div class="form-group">
+      <label for="password">パスワード</label>
         <% if @minimum_password_length %>
           <em>(<%= @minimum_password_length %> 文字以上)</em>
         <% end %><br />
-        <input type="password" class="form-control" id="password" placeholder="ご自身で決めたパスワードを入力">
-      </div>
-      <div class="form-group">
-        <label for="password_confirmation">パスワード（確認用）</label>
-        <input type="password_confirmation" class="form-control" id="password_confirmation" placeholder="確認のためもう一度入力">
-      </div>
-
-      <button type="submit" class="btn btn-primary btn-lg">新規登録</button>
+      <input type="password" class="form-control" id="password" placeholder="ご自身で決めたパスワードを入力">
+    </div>
+    <div class="form-group">
+      <label for="password_confirmation">パスワード（確認用）</label>
+      <input type="password_confirmation" class="form-control" id="password_confirmation" placeholder="確認のためもう一度入力">
+    </div>
+    <button type="submit" class="btn btn-success btn-lg">新規登録</button>
     <% end %>
-<div class="row mt-3">
-※すでに登録済の方はこちらから<%= render "general_user/shared/links" %>
-</div> 
-</form>
+    <div class="row mt-3">
+    ※すでに登録済の方はこちらから<%= render "general_user/shared/links" %>
+    </div>
+  </form>
 </div>

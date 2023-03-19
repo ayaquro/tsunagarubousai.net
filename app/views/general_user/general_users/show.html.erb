@@ -1,27 +1,39 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-3 p-5 card">
 <!--一般ユーザーの詳細-->
-<div>
-  <%= image_tag @general_user.get_profile_image(300,300) %>
-  <h5><%= @general_user.last_name %><%= @general_user.first_name %></h5>
-  <h5><%= @general_user.kana_last_name %><%= @general_user.kana_first_name %></h5>
-  <h5><%= @general_user.email %></h5>
+     <h4 class="row justify-content-center">
+       プロフィール
+     </h4>
+     <div class="row m-3 justify-content-center">
+        <%= image_tag @general_user.get_profile_image(300,300) %>
+      </div>
+      <div class="row m-3 justify-content-center mt-2">
+        <h6 class="d-flex flex-column">氏名:<%= @general_user.last_name %><%= @general_user.first_name %></h5>
+        <h6 class="d-flex flex-column">カナ:<%= @general_user.kana_last_name %><%= @general_user.kana_first_name %></h5>
+        <h6 class="d-flex flex-column">Email:<%= @general_user.email %></h5>
+      </div>
+      <!--ログインしているユーザー本人のみ編集リンクを表示させる-->
+      <%# if @general_user == current_general_user %>
+        <p class="d-flex flex-column text-center"><%= link_to "プロフィールを編集", edit_general_user_path(@general_user.id) %></p>
+        <p class="d-flex flex-column text-center"><%= link_to "退会する", confirm_path %></p>
+      <%# end %>
+    </div>
+    <div class="col-9">
+      <!--一般ユーザーの投稿一覧-->
+      <h3><%= @general_user.last_name %><%= @general_user.first_name %>さんの投稿一覧</h3>
+      <% @posts.each do |post| %>
+      <div>
+        <%= link_to post_path(post.id) do %>
+          <%= image_tag post.get_image(100,100) %>
+        <% end %>
+        <p>地区<%= post.district.district_name %></p>
+        <P>タイトル: <%= post.posted_title %></p>
+        <p>本文: <%= post.posted_text %></p>
+        <p>投稿日時: <%= post.created_at.strftime("%Y/%m/%d %H:%M:%S") %></p>
+        <p><%= link_to "#{post.posted_comments.count} コメント", post_path(post.id) %></p>
+      </div>
+      <% end %>
+    </div>
+  </div>
 </div>
-
-<!--一般ユーザーの投稿一覧-->
-<h3><%= @general_user.last_name %><%= @general_user.first_name %>さんの投稿一覧</h3>
-<% @posts.each do |post| %>
-<div>
-  <%= link_to post_path(post.id) do %>
-    <%= image_tag post.get_image(100,100) %>
-  <% end %>
-  <p>地区<%= post.district.district_name %></p>
-  <P>タイトル: <%= post.posted_title %></p>
-  <p>本文: <%= post.posted_text %></p>
-  <p>投稿日時: <%= post.created_at.strftime("%Y/%m/%d %H:%M:%S") %></p>
-  <p><%= link_to "#{post.posted_comments.count} コメント", post_path(post.id) %></p>
-</div>
-<% end %>
-<!--ログインしているユーザー本人のみ編集リンクを表示させる-->
-<%# if @general_user == current_general_user %>
-  <p><%= link_to "プロフィールを編集", edit_general_user_path(@general_user.id) %></p>
-  <p><%= link_to "退会する", confirm_path %></p>
-<%# end %>
