@@ -29,15 +29,18 @@ class GeneralUser::PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    @districts = District.all
   end
 
   def show
     @post = Post.find(params[:id])
+
     @posted_comment = PostedComment.new
   end
 
   def update
     post = Post.find(params[:id])
+    @districts = District.all
     if post.update(post_params)
       redirect_to post_path(post.id) # 投稿詳細ページにリダイレクト
     else

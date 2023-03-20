@@ -9,31 +9,45 @@
         <%= image_tag @general_user.get_profile_image(300,300) %>
       </div>
       <div class="row m-3 justify-content-center mt-2">
-        <h6 class="d-flex flex-column">氏名:<%= @general_user.last_name %><%= @general_user.first_name %></h5>
-        <h6 class="d-flex flex-column">カナ:<%= @general_user.kana_last_name %><%= @general_user.kana_first_name %></h5>
-        <h6 class="d-flex flex-column">Email:<%= @general_user.email %></h5>
+        <h6 class="d-flex flex-column">氏名:<%= @general_user.last_name %><%= @general_user.first_name %></h6>
+        <h6 class="d-flex flex-column">カナ:<%= @general_user.kana_last_name %><%= @general_user.kana_first_name %></h6>
+        <h6 class="d-flex flex-column">Email:<%= @general_user.email %></h6>
       </div>
       <!--ログインしているユーザー本人のみ編集リンクを表示させる-->
       <%# if @general_user == current_general_user %>
-        <p class="d-flex flex-column text-center"><%= link_to "プロフィールを編集", edit_general_user_path(@general_user.id) %></p>
-        <p class="d-flex flex-column text-center"><%= link_to "退会する", confirm_path %></p>
+        <p class="d-flex flex-column text-center"><%= link_to "プロフィールを編集", edit_general_user_path(@general_user.id), class: "btn btn-warning" %></p>
+        <p class="d-flex flex-column text-center"><%= link_to "退会する", confirm_path, class: "btn btn-danger" %></p>
       <%# end %>
     </div>
-    <div class="col-9">
+    <div class="col-9 pl-5">
       <!--一般ユーザーの投稿一覧-->
       <h3><%= @general_user.last_name %><%= @general_user.first_name %>さんの投稿一覧</h3>
-      <% @posts.each do |post| %>
-      <div>
-        <%= link_to post_path(post.id) do %>
-          <%= image_tag post.get_image(100,100) %>
-        <% end %>
-        <p>地区<%= post.district.district_name %></p>
-        <P>タイトル: <%= post.posted_title %></p>
-        <p>本文: <%= post.posted_text %></p>
-        <p>投稿日時: <%= post.created_at.strftime("%Y/%m/%d %H:%M:%S") %></p>
-        <p><%= link_to "#{post.posted_comments.count} コメント", post_path(post.id) %></p>
-      </div>
-      <% end %>
+      <table class="table table-hover mt-3 text-center">
+        <thead>
+          <tr>
+            <th scope="col">投稿日時</th>
+            <th scope="col">地区</th>
+            <th scope="col">タイトル</th>
+            <th scope="col">画像</th>
+            <th scope="col">コメント数</th>
+            <th scope="col">危険マーク数</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @posts.each do |post| %>
+          <tr>
+            <td><%= post.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+            <td><%= post.district.district_name %></td>
+            <td><%= post.posted_title %></td>
+            <td><%= image_tag post.get_image(100,100) %></td>
+            <td><%= post.posted_comments.count %>件</td>
+            <td><i class="fas fa-exclamation-triangle text-danger"></i><%= post.dangers.count %></td>
+            <td><%= link_to "詳細", post_path(post.id), class: "btn btn-info" %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
