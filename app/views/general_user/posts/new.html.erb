@@ -1,30 +1,47 @@
-<h1>危険箇所の投稿</h1>
-<% if @post.errors.any? %>
-  <%= @post.errors.count %>件のエラーが発生しました。
-  <ul>
-    <% @post.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-  <% end %>
-  <!-- form_with部分 -->
-  <%#= form_with model: @post, url: '/posts',method: :post do |f| %>
+<div class="container mt-5 p-5 card shadow-lg">
+  <div class="row m-3">
+    <h2 class="col-4 text-center">危険箇所の投稿</h2>
+  </div>
+      <% if @post.errors.any? %>
+        <%= @post.errors.count %>件のエラーが発生しました。
+      <ul>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+      <% end %>
+      <!-- form_with部分 -->
+      <%#= form_with model: @post, url: '/posts',method: :post do |f| %>
   <%= form_with model: @post do |f| %>
-
-<h4>投稿画像</h4>
-  <%= f.file_field :posted_image, accept: "image/*" %>
-  <!--画像ファイルしか投稿できないようにaccept: "image/*"を記載-->
-
-<h4>当該地区の選択</h4>
-  <%# byebug %>
-  <%= f.collection_select(:district_id, @districts, :id, :district_name, {include_blank: "---"}, {}) %>
-
-<h4>タイトル</h4>
-<%= f.text_field :posted_title %>
-
-<h4>本文</h4>
-<%= f.text_area :posted_text %>
-
-<%= f.submit '投稿' %>
-
-<% end %>
+  <div class="row m-2">
+    <h5 class="col-3 text-center">投稿画像</h5>
+    <div class="col-9">
+      <%= f.file_field :posted_image, accept: "image/*" %>
+      <!--画像ファイルしか投稿できないようにaccept: "image/*"を記載-->
+    </div>
+  </div>
+  <div class="row m-2">
+    <h5 class="col-3 text-center">当該地区の選択</h5>
+    <div class="col-9">
+      <%= f.collection_select(:district_id, @districts, :id, :district_name, {include_blank: "---"}, {}) %>
+    </div>
+  </div>
+  <div class="row m-2">
+    <h5 class="col-3 text-center">タイトル</h5>
+    <div class="col-7">
+      <%= f.text_field :posted_title, class: "form-control" %>
+    </div>
+  </div>
+  <div class="row m-2">
+    <h5 class="col-3 text-center">説明</h5>
+    <div class="col-7">
+      <%= f.text_area :posted_text, class: "form-control" %>
+    </div>
+  </div>
+  <div class="row m-2">
+    <div class="offset-3 col-4">
+      <%= f.submit "投稿",class: "btn btn-primary btn-block " %>
+    </div>
+  </div>
+  <% end %>
+</div>

@@ -5,7 +5,7 @@ class Staff::GeneralUsersController < ApplicationController
 
   def show
     @general_user = GeneralUser.find(params[:id])
-    @posts = @general_user.posts
+    @posts = @general_user.posts.order(created_at: :desc)
   end
 
   def edit

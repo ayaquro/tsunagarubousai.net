@@ -1,47 +1,74 @@
 <div class="container mt-5 p-5 card shadow-lg">
   <h1 class="row m-3">新規会員登録</h1>
-  <form>
       <%= form_with model: @general_user, url: general_user_registration_path, method: :post, local: true do |f| %>
       <%#= render "shared/error_messages", resource: resource %>
-    <div class="form-row mt-3">
-      <div class="form-group col-md-6">
-        <label for="last_name">姓</label>
-        <input type="last_name" class="form-control" id="last_name" placeholder="例）防災">
+    <div class="row mt-3 text-right">
+      <div class="col-2 offset-2">
+        <h5>名前</h5>
       </div>
-      <div class="form-group col-md-6">
-        <label for="first_name">名</label>
-        <input type="first_name" class="form-control" id="first_name" placeholder="例）備子">
+      <div class="col-1">
+        <h6>姓</h6>
       </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="kana_last_name">セイ</label>
-        <input type="kana_last_name" class="form-control" id="kana_last_name" placeholder="例）ボウサイ">
+      <div class="col-3">
+        <%= f.text_field :last_name, autofocus: true, placeholder: "例）防災",class:"form-control" %>
       </div>
-      <div class="form-group col-md-6">
-        <label for="kana_first_name">メイ</label>
-        <input type="kana_first_name" class="form-control" id="kana_first_name" placeholder="例）トモコ">
+      <div class="col-1">
+        <h6>名</h6>
+      </div>
+      <div class="col-3">
+        <%= f.text_field :first_name, autofocus: true, placeholder: "例）備子",class:"form-control"  %>
       </div>
     </div>
-    <div class="form-group">
-      <label for="email">メールアドレス</label>
-      <input type="email" class="form-control" id="email" placeholder="例）bousai@taisaku.example">
+    <div class="row mt-3 text-right">
+      <div class="col-1 offset-4">
+        <h6>セイ</h6>
+      </div>
+      <div class="col-3">
+        <%= f.text_field :kana_last_name, autofocus: true, placeholder: "例）ボウサイ",class:"form-control" %>
+      </div>
+      <div class="col-1">
+        <h6>メイ</h6>
+      </div>
+      <div class="col-3">
+        <%= f.text_field :kana_first_name, autofocus: true, placeholder: "例）トモコ",class:"form-control" %>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="password">パスワード</label>
+    <div class="row mt-3 text-right">
+      <div class="col-3 offset-1">
+        <h5>メールアドレス</h5>
+      </div>
+      <div class=col-8>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "例）bousai@taisaku.example" ,class:"form-control"%>
+      </div>
+    </div>
+    <div class="row mt-3 text-right">
+      <div class="col-3 offset-1">
+        <h5>パスワード</h5>
         <% if @minimum_password_length %>
-          <em>(<%= @minimum_password_length %> 文字以上)</em>
-        <% end %><br />
-      <input type="password" class="form-control" id="password" placeholder="ご自身で決めたパスワードを入力">
+        (<%= @minimum_password_length %> 文字以上)
+        <% end %>
+      </div>
+      <div class=col-8>
+        <%= f.password_field :password, autocomplete: "new-password", placeholder: "ご自身で決めたパスワードを入力",class:"form-control" %>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="password_confirmation">パスワード（確認用）</label>
-      <input type="password_confirmation" class="form-control" id="password_confirmation" placeholder="確認のためもう一度入力">
+    <div class="row mt-3 text-right">
+      <div class="col-3 offset-1">
+        <h5>パスワード（確認用）</h5>
+      </div>
+      <div class=col-7>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "確認のためもう一度入力" ,class:"form-control"%>
+      </div>
     </div>
-    <button type="submit" class="btn btn-success btn-lg">新規登録</button>
+    <div class="row mt-3">
+      <div class="col-3 offset-4">
+        <%= f.submit "新規登録", class:"btn btn-success btn-lg" %>
+      </div>
+    </div>
     <% end %>
     <div class="row mt-3">
-    ※すでに登録済の方はこちらから<%= render "general_user/shared/links" %>
+      <div class="col-8 offset-4">
+        <h6>※すでに登録済の方はこちらから<%= render "general_user/shared/links" %></h6>
+      </div>
     </div>
-  </form>
 </div>

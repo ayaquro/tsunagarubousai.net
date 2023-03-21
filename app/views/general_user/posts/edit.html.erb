@@ -1,42 +1,45 @@
 <div class="container mt-5 p-5 card shadow-lg">
-  <h1 class="row m-3">投稿の編集</h1>
-  <% if @post.errors.any? %>
-    <%= @post.errors.count %>件のエラーが発生しました。
-    <ul>
-      <% @post.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-      <% end %>
-    </ul>
-  <% end %>
-  <%= form_with model: @post, url: post_path(@post.id),method: :patch do |f| %>
+  <div class="row m-3">
+   <h2 class="col-3 text-center">投稿の編集</h2>
+  </div>
+    <% if @post.errors.any? %>
+      <%= @post.errors.count %>件のエラーが発生しました。
+      <ul>
+        <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    <% end %>
+    <%= form_with model: @post, url: post_path(@post.id),method: :patch do |f| %>
   <div class="row m-2">
-    <h5 class="col-3 text-center">投稿画像</h4>
+    <h5 class="col-3 text-center">投稿画像</h5>
     <div class="col-9">
-    <%= f.file_field :posted_image, accept: "image/*" %>
-    <!--画像ファイルしか投稿できないようにaccept: "image/*"を記載-->
+      <%= f.file_field :posted_image, accept: "image/*" %>
+      <!--画像ファイルしか投稿できないようにaccept: "image/*"を記載-->
     </div>
   </div>
   <div class="row m-2">
-    <h5 class="col-3 text-center">当該地区の選択</h4>
+    <h5 class="col-3 text-center">当該地区の選択</h5>
     <div class="col-9">
       <%= f.collection_select(:district_id, @districts, :id, :district_name, {include_blank: "---"}, {}) %>
     </div>
   </div>
   <div class="row m-2">
-    <h5 class="col-3 text-center">タイトル</h4>
-    <div class="col-9">
-    <%= f.text_field :posted_title %>
+    <h5 class="col-3 text-center">タイトル</h5>
+    <div class="col-7">
+      <%= f.text_field :posted_title, class: "form-control" %>
     </div>
   </div>
   <div class="row m-2">
-    <h5 class="col-3 text-center">説明</h4>
-    <div class="col-9">
-    <%= f.text_area :posted_text %>
+    <h5 class="col-3 text-center">説明</h5>
+    <div class="col-7 ">
+      <%= f.text_area :posted_text, class: "form-control" %>
     </div>
   </div>
   <div class="row m-2">
     <div class="offset-3 col-9">
-  <%= f.submit '編集する',class: "btn btn-warning" %>
+      <%= f.submit '編集する',class: "btn btn-warning" %>
+    </div>
   </div>
   <% end %>
 </div>

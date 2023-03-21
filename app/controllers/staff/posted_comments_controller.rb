@@ -1,6 +1,6 @@
 class Staff::PostedCommentsController < ApplicationController
   def index
-    @posted_comments = PostedComment.all
+    @posted_comments = PostedComment.all.order(created_at: :desc)
   end
 
   def destroy

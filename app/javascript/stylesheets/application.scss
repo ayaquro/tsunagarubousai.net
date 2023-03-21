@@ -1,2 +1,17 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+.headercolor{
+  background-color: #26499d;
+}
+
+.backcolor{
+  background-color: #f4f9ff;
+}
+
+.main-visual {
+  width: 100%; /* 横幅いっぱい */
+  height: 600px; /* 高さ300px */
+  background-size: cover; /* 縦横比を維持したまま背景領域を埋め尽くす */
+  background-image: url("../images/umi.jpg");
+}

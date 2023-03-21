@@ -21,7 +21,7 @@ class GeneralUser::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
+    @posts = Post.all.order(created_at: :desc).page(params[:page])
     @posts = @posts.where(district_id: params[:district_ids]) if params[:district_ids] && params[:district_ids].compact_blank.any?
     @posts = @posts.where('posted_title like ?', "%#{params[:keyword]}%").or(@posts.where('posted_text like ?', "%#{params[:keyword]}%")) if params[:keyword].present?
     @districts = District.all

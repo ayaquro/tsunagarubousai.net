@@ -1,42 +1,57 @@
-<h1>危険箇所投稿一覧</h1>
-  <!--キーワード検索窓-->
-  <%= form_with url: posts_path, method: :get, local: true do |f| %>
-  <%= f.text_field :keyword, value: params[:keyword] %>
-  <!--タグ検索チェックボックス-->
-   <%#= f.collection_select(:district_id, @districts, :id, :district_name, {include_blank: "---", selected: params[:district_id]}, {}) %>
-  <%= f.collection_check_boxes(:district_ids, @districts, :id, :district_name, {checked: params[:district_ids]}) do |b| %>
-    <%= b.label { b.check_box + b.text } %>
-  <% end %>
-  <%= f.submit "検索する" %>
-  <% end %>
-<table>
-  <tr>
-    <th>投稿日時</th>
-    <th>地区</th>
-    <th>タイトル</th>
-    <th>投稿画像</th>
-    <th>投稿者</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-<% @posts.each do |post| %>
-  <tr>
-      <td><%= post.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
-      <td><%= post.district.district_name %></td>
-      <td><%= post.posted_title %></td>
-      <td><%= link_to post_path(post.id) do %>
-            <%= image_tag post.get_image(100,100) %>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-11 offset-1">
+      <h1>危険箇所投稿一覧</h1>
+    </div>
+  </div>
+  <div class="row mt-2">
+      <div class="col-12 text-center">
+        <!--キーワード検索窓-->
+        <%= form_with url: posts_path, method: :get, local: true do |f| %>
+        <%= f.text_field :keyword, value: params[:keyword] %>
+        <!--タグ検索チェックボックス-->
+         <%#= f.collection_select(:district_id, @districts, :id, :district_name, {include_blank: "---", selected: params[:district_id]}, {}) %>
+        <%= f.collection_check_boxes(:district_ids, @districts, :id, :district_name, {checked: params[:district_ids]}) do |b| %>
+          <%= b.label { b.check_box + b.text } %>
+        <% end %>
+        <%= f.submit "検索する", class: "btn btn-info" %>
+        <% end %>
+    </div>
+  </div>
+  <table class="table table-hover mt-3 text-center">
+    <thead>
+      <tr>
+        <th scope="col">投稿日時</th>
+        <th scope="col">地区</th>
+        <th scope="col">タイトル</th>
+        <th scope="col">投稿画像</th>
+        <th scope="col">投稿者</th>
+        <th scope="col">コメント数</th>
+        <th scope="col">危険マーク</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= post.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+        <td><%= post.district.district_name %></td>
+        <td><%= post.posted_title %></td>
+        <td><%= image_tag post.get_image(100,100) %></td>
+        <td><%= post.general_user.last_name %><%= post.general_user.first_name %></td>
+        <td><%= post.posted_comments.count %>件</td>
+        <td><i class="fas fa-exclamation-triangle text-danger"></i><%= post.dangers.count %></td>
+        <td><%= link_to "詳細", post_path(post.id), class: "btn btn-info" %></td>
+        <td><% if post.general_user == current_general_user %>
+              <%= link_to "削除", post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
             <% end %>
-      </td>
-      <td><%= post.general_user.last_name %><%= post.general_user.first_name %></td>
-      <td><%= link_to "#{post.posted_comments.count} コメント", post_path(post.id) %></td>
-      <td><%= link_to "#{post.dangers.count}キケン", post_path(post.id) %></td>
-      <td><%= link_to "詳細", post_path(post.id) %></td>
-      <td><% if post.general_user == current_general_user %>
-            <%= link_to "削除", post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-          <% end %>
-      </td>
-  </tr>
-  <% end %>
-</table>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <div class="row">
+    <div class="offset-5 col-2 text-center">
+      <%= paginate @posts %>
+    </div>
+  </div>
+</div>
