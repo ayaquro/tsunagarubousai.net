@@ -14,11 +14,11 @@ class Staff::GeneralUsersController < ApplicationController
 
   def update
     @general_user = GeneralUser.find(params[:id])
-    if @general_user.update(general_user_params)
-      redirect_to staff_general_user_path(params[:id]) # 編集した会員の詳細ページにリダイレクト
-    else
-      render :edit
-    end
+      if @general_user.update(general_user_params)
+        redirect_to staff_general_user_path(params[:id]) # 編集した会員の詳細ページにリダイレクト
+      else
+        render :edit
+      end
   end
 
   private

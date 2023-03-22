@@ -1,29 +1,57 @@
-<h1>投稿詳細</h1>
-<div>
-  <%= image_tag @post.get_image(300,300) %>
-  <p>地区</p>
-  <p>タイトル: <%= @post.posted_title %></p>
-  <P>本文: <%= @post.posted_text %></p>
-  <!--投稿者画像-->
-  <p><%= image_tag @post.general_user.get_profile_image(50,50) %></p>
-  <p>投稿者: <%= @post.general_user.last_name %><%= @post.general_user.first_name %></p>
-  <p>投稿日時:<%= @post.created_at.strftime("%Y/%m/%d %H:%M:%S") %></p>
-
-  <%= link_to "編集", edit_staff_post_path(@post.id) %>
-  <%= link_to "削除", staff_post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-
-  <!--危険マーク-->
-  <!--FontAwesomeの危険マーク(押した後)-->
-  <i class="fas fa-exclamation-triangle text-danger"></i><%= @post.dangers.count %>キケン
-</div>
-
-<div>
-  <p>コメント件数:<%= @post.posted_comments.count %></p>
-  <% @post.posted_comments.each do |posted_comment| %>
-    <p><%= image_tag posted_comment.general_user.get_profile_image(50,50) %></p>
-    <%= posted_comment.general_user.last_name %><%= posted_comment.general_user.first_name %>
-    <%= posted_comment.posted_comment %>
-    <%= posted_comment.created_at.strftime("%Y/%m/%d %H:%M:%S") %>
-    <%= link_to "削除", staff_post_posted_comment_path(posted_comment.post,posted_comment), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-  <% end %>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-5">
+      <h2 class="row justify-content-center mb-5">投稿詳細</h2>
+      <div class="row justify-content-center ">
+        <%= image_tag @post.get_image(400,400) %>
+      </div>
+    </div>
+    <div class="col-7">
+      <div class="card p-3">
+        <div class="row mt-5">
+          <!--投稿者画像-->
+          <div class="col-2"><%= image_tag @post.general_user.get_profile_image(100,100) %></div>
+          <div class="col-10">
+            <h5 class="d-flex flex-column">投稿者: <%= @post.general_user.last_name %><%= @post.general_user.first_name %></h5>
+            <h5 class="d-flex flex-column">投稿日時:<%= @post.created_at.strftime("%Y/%m/%d %H:%M:%S") %></h5>
+            <h5 class="d-flex flex-column">地区:<%= @post.district.district_name %></h5>
+            <h5 class="d-flex flex-column">タイトル: <%= @post.posted_title %></h5>
+            <h5 class="d-flex flex-column">説明: <%= @post.posted_text %></h5>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-3">コメント件数:<%= @post.posted_comments.count %></div>
+          <div class="col-3">
+            <!--危険マーク-->
+            <!--FontAwesomeの危険マーク(押した後)-->
+            <i class="fas fa-exclamation-triangle text-danger"></i><%= @post.dangers.count %>
+          </div>
+            <div class="col-2 text-left"><%= link_to "削除", staff_post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %></div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <table class="table table-hover">
+          <tbody>
+            <%# @post.posted_comments.each do |posted_comment| %>
+            <% @posted_comments.each do |posted_comment| %>
+              <tr>
+                <td scope="col" style="width: 10%"><%= image_tag posted_comment.general_user.get_profile_image(50,50) %></td>
+                <td scope="col" style="width: 20%"><%= posted_comment.general_user.last_name %><%= posted_comment.general_user.first_name %></td>
+                <td scope="col" style="width: 40%"><%= posted_comment.posted_comment %></td>
+                <td scope="col" style="width: 15%"><%= posted_comment.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+                <td scope="col" style="width: 15%">
+                  <%= link_to "削除", staff_post_posted_comment_path(posted_comment.post,posted_comment), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn-sm btn-danger" %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-3 offset-2">
+          <%= paginate @posted_comments %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

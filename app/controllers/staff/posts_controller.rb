@@ -5,13 +5,7 @@ class Staff::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @posted_comment = PostedComment.new
-  end
-
-  def edit
-  end
-
-  def update
+    @posted_comments = @post.posted_comments.all.order(created_at: :desc).page(params[:page])
   end
 
   def destroy

@@ -34,8 +34,8 @@ class GeneralUser::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-
     @posted_comment = PostedComment.new
+    @posted_comments = @post.posted_comments.all.order(created_at: :desc).page(params[:page])
   end
 
   def update

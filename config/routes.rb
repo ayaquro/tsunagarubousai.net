@@ -40,7 +40,7 @@ Rails.application.routes.draw do
   namespace :staff do
     resources :general_users, only: [:index, :show, :edit, :update]
     resources :districts, only: [:index, :create, :edit, :update]
-    resources :posts, only: [:index, :show, :edit, :update, :destroy] do
+    resources :posts, only: [:index, :show, :destroy] do
       resources :posted_comments, only: [:destroy]
     end
     resources :posted_comments, only: [:index]
