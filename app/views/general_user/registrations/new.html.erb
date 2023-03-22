@@ -1,74 +1,78 @@
 <div class="container mt-5 p-5 card shadow-lg">
-  <h1 class="row m-3">新規会員登録</h1>
+  <div class="row m-3">
+    <h1 class="col-4 offset-1">
+      新規会員登録
+    </h1>
+  </div>
       <%= form_with model: @general_user, url: general_user_registration_path, method: :post, local: true do |f| %>
       <%#= render "shared/error_messages", resource: resource %>
-    <div class="row mt-3 text-right">
-      <div class="col-2 offset-2">
-        <h5>名前</h5>
-      </div>
-      <div class="col-1">
-        <h6>姓</h6>
-      </div>
-      <div class="col-3">
-        <%= f.text_field :last_name, autofocus: true, placeholder: "例）防災",class:"form-control" %>
-      </div>
-      <div class="col-1">
-        <h6>名</h6>
-      </div>
-      <div class="col-3">
-        <%= f.text_field :first_name, autofocus: true, placeholder: "例）備子",class:"form-control"  %>
-      </div>
+  <div class="row mt-3">
+    <div class="col-2 offset-1 text-right">
+      <h5>名前</h5>
     </div>
-    <div class="row mt-3 text-right">
-      <div class="col-1 offset-4">
-        <h6>セイ</h6>
-      </div>
-      <div class="col-3">
-        <%= f.text_field :kana_last_name, autofocus: true, placeholder: "例）ボウサイ",class:"form-control" %>
-      </div>
-      <div class="col-1">
-        <h6>メイ</h6>
-      </div>
-      <div class="col-3">
-        <%= f.text_field :kana_first_name, autofocus: true, placeholder: "例）トモコ",class:"form-control" %>
-      </div>
+    <div class="col-1 text-right">
+      <h6>姓</h6>
     </div>
-    <div class="row mt-3 text-right">
-      <div class="col-3 offset-1">
-        <h5>メールアドレス</h5>
-      </div>
-      <div class=col-8>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "例）bousai@taisaku.example" ,class:"form-control"%>
-      </div>
+    <div class="col-3">
+      <%= f.text_field :last_name, autofocus: true, placeholder: "例）防災",class:"form-control" %>
     </div>
-    <div class="row mt-3 text-right">
-      <div class="col-3 offset-1">
-        <h5>パスワード</h5>
-        <% if @minimum_password_length %>
-        (<%= @minimum_password_length %> 文字以上)
-        <% end %>
-      </div>
-      <div class=col-8>
-        <%= f.password_field :password, autocomplete: "new-password", placeholder: "ご自身で決めたパスワードを入力",class:"form-control" %>
-      </div>
+    <div class="col-1 text-right">
+      <h6>名</h6>
     </div>
-    <div class="row mt-3 text-right">
-      <div class="col-3 offset-1">
-        <h5>パスワード（確認用）</h5>
-      </div>
-      <div class=col-7>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "確認のためもう一度入力" ,class:"form-control"%>
-      </div>
+    <div class="col-3">
+      <%= f.text_field :first_name, autofocus: true, placeholder: "例）備子",class:"form-control"  %>
     </div>
-    <div class="row mt-3">
-      <div class="col-3 offset-4">
-        <%= f.submit "新規登録", class:"btn btn-success btn-lg" %>
-      </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-1 offset-3 text-right">
+      <h6>セイ</h6>
     </div>
-    <% end %>
-    <div class="row mt-3">
-      <div class="col-8 offset-4">
-        <h6>※すでに登録済の方はこちらから<%= render "general_user/shared/links" %></h6>
-      </div>
+    <div class="col-3">
+      <%= f.text_field :kana_last_name, autofocus: true, placeholder: "例）ボウサイ",class:"form-control" %>
     </div>
+    <div class="col-1 text-right">
+      <h6>メイ</h6>
+    </div>
+    <div class="col-3">
+      <%= f.text_field :kana_first_name, autofocus: true, placeholder: "例）トモコ",class:"form-control" %>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-3 offset-1 text-right">
+      <h5>メールアドレス</h5>
+    </div>
+    <div class="col-6">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "例）bousai@taisaku.example" ,class:"form-control"%>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-3 offset-1 text-right">
+      <h5>パスワード</h5>
+      <% if @minimum_password_length %>
+      (<%= @minimum_password_length %> 文字以上)
+      <% end %>
+    </div>
+    <div class="col-5">
+      <%= f.password_field :password, autocomplete: "new-password", placeholder: "ご自身で決めたパスワードを入力",class:"form-control" %>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-3 offset-1 text-right">
+      <h5>パスワード</h5><h6>（確認用）</h6>
+    </div>
+    <div class="col-5">
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "確認のためもう一度入力" ,class:"form-control"%>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-3 offset-4">
+      <%= f.submit "新規登録", class:"btn btn-success btn-lg btn-block" %>
+    </div>
+  </div>
+  <% end %>
+  <div class="row mt-3">
+    <div class="col-8 offset-4">
+      <h6>※すでに登録済の方はこちらから<%= render "general_user/shared/links" %></h6>
+    </div>
+  </div>
 </div>

@@ -4,7 +4,7 @@ class GeneralUser::GeneralUsersController < ApplicationController
   before_action :ensure_guest_user, only: [:edit]
   def show
     @general_user = GeneralUser.find(params[:id])
-    @posts = @general_user.posts.order(created_at: :desc)
+    @posts = @general_user.posts.order(created_at: :desc).page(params[:page])
     # アソシエーションを持っているモデル同士の記述方法。特定の@general_userに関連付けられた投稿すべて(.posts)
     #orderメソッドで投稿データの日付の順序変更（desc:降順）
   end

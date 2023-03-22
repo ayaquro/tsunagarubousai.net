@@ -13,17 +13,20 @@
 
   <body class="d-flex flex-column vh-100 backcolor">
     <header class="shadow-sm headercolor">
-      <nav class="navbar navbar-expand-lg navbar-light">
+      <nav class="navbar navbar-expand-lg navbar-light text-light">
         <div class="container">
           <a class="navbar-brand p-3 text-light" href="/"><%= "つながる防災.net" %></a>
             <!--ハンバーガーメニュー-->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler text-light" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon text-light"></span>
             </button>
               <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ml-auto">
                   <!--管理者がログイン状態の時-->
                   <% if staff_signed_in? %>
+                  <il class="nav-item">
+                    <%= link_to "お知らせ", about_path, class: 'nav-link text-light' %>
+                  </il>
                   <il class="nav-item">
                     <%= link_to "投稿一覧", staff_posts_path, class: 'nav-link text-light' %>
                   </il>
@@ -42,7 +45,7 @@
                   <!--一般ユーザーがログイン状態の時-->
                   <% elsif general_user_signed_in? %>
                   <il class="nav-item">
-                    <%= link_to "お知らせ", about_path, class: 'nav-link btn text-light' %>
+                    <%= link_to "お知らせ", about_path, class: 'nav-link text-light' %>
                   </il>
                   <il class="nav-item">
                     <%= link_to "危険箇所の投稿", new_post_path, class: 'nav-link text-light' %>

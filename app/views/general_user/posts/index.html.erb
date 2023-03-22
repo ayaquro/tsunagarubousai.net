@@ -1,6 +1,6 @@
 <div class="container mt-5">
   <div class="row">
-    <div class="col-11 offset-1">
+    <div class="col-12">
       <h1>危険箇所投稿一覧</h1>
     </div>
   </div>
@@ -41,9 +41,9 @@
         <td><%= post.general_user.last_name %><%= post.general_user.first_name %></td>
         <td><%= post.posted_comments.count %>件</td>
         <td><i class="fas fa-exclamation-triangle text-danger"></i><%= post.dangers.count %></td>
-        <td><%= link_to "詳細", post_path(post.id), class: "btn btn-info" %></td>
+        <td><%= link_to "詳細", post_path(post.id), class: "btn btn-sm btn-info" %></td>
         <td><% if post.general_user == current_general_user %>
-              <%= link_to "削除", post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+              <%= link_to "削除", post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger" %>
             <% end %>
         </td>
       </tr>

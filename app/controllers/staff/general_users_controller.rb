@@ -1,11 +1,11 @@
 class Staff::GeneralUsersController < ApplicationController
   def index
-    @general_users = GeneralUser.all
+    @general_users = GeneralUser.all.page(params[:page])
   end
 
   def show
     @general_user = GeneralUser.find(params[:id])
-    @posts = @general_user.posts.order(created_at: :desc)
+    @posts = @general_user.posts.order(created_at: :desc).page(params[:page])
   end
 
   def edit
