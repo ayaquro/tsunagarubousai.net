@@ -14,7 +14,6 @@
         <h6 class="d-flex flex-column">氏名:<%= @general_user.last_name %><%= @general_user.first_name %></h6>
         <h6 class="d-flex flex-column mt-2">カナ:<%= @general_user.kana_last_name %><%= @general_user.kana_first_name %></h6>
         <h6 class="d-flex flex-column mt-2">Email:<%= @general_user.email %></h6>
-
       <!--ログインしているユーザー本人のみ編集リンクを表示させる-->
       <%# if @general_user == current_general_user %>
         <div class="d-flex flex-column mt-3"><%= link_to "プロフィールを編集", edit_general_user_path(@general_user.id), class: "btn btn-warning" %></div>

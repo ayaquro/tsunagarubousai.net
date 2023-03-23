@@ -1,15 +1,31 @@
-<h1>地区の編集</h1>
-<% if @district.errors.any? %>
-  <%= @district.errors.count %>件のエラーが発生しました。
-  <ul>
-    <% @district.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
+<div class="container mt-5 p-5 card shadow-lg">
+  <div class="row">
+    <h2 class="col-5 offset-1">
+      地区の編集
+    </h2>
+  </div>
+    <% if @district.errors.any? %>
+      <%= @district.errors.count %>件のエラーが発生しました。
+      <ul>
+        <% @district.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
     <% end %>
-  </ul>
-<% end %>
-  <%= form_with model: @district, url: staff_district_path(@district.id), method: :patch do |f| %>
-<h4>地区名</h4>
-  <%= f.text_field :district_name %>
-  <%= f.submit '変更を保存' %>
-<% end %>
+    <%= form_with model: @district, url: staff_district_path(@district.id), method: :patch do |f| %>
+    <div class="row mt-3">
+      <div class="col-3 text-right">
+        <h5>地区名</h5>
+      </div>
+      <div class="col-5">
+        <%= f.text_field :district_name,class:"form-control" %>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-5 offset-3">
+        <%= f.submit "変更を保存", class:"btn btn-warning" %>
+      </div>
+    </div>
+      <% end %>
+</div>
 

@@ -1,7 +1,7 @@
 class Staff::DistrictsController < ApplicationController
   def index
     @district = District.new
-    @districts = District.all
+    @districts = District.all.page(params[:page])
   end
 
   def create
