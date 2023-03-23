@@ -6,82 +6,96 @@
           <%= image_tag @post.get_image(400,400)%>
         </div>
     </div>
-  <div class="col-7">
-    <div class="card p-3">
-      <div class="row mt-5">
-        <!--投稿者画像-->
-        <div class="col-2"><%= image_tag @post.general_user.get_profile_image(100,100) %></div>
-        <div class="col-10">
-          <h5 class="d-flex flex-column">投稿者: <%= @post.general_user.last_name %><%= @post.general_user.first_name %></h5>
-          <h5 class="d-flex flex-column">投稿日時:<%= @post.created_at.strftime("%Y/%m/%d %H:%M:%S") %></h5>
-          <h5 class="d-flex flex-column">地区:<%= @post.district.district_name %></h5>
-          <h5 class="d-flex flex-column">タイトル: <%= @post.posted_title %></h5>
-          <h5 class="d-flex flex-column">説明: <%= @post.posted_text %></h5>
+    <div class="col-7">
+      <div class="card p-3">
+        <div class="row mt-5">
+          <!--投稿者画像-->
+          <div class="col-2"><%= image_tag @post.general_user.get_profile_image(100,100) %></div>
+          <div class="col-9 offset-1">
+            <h5 class="d-flex flex-column">投稿者: <%= @post.general_user.last_name %><%= @post.general_user.first_name %></h5>
+            <h5 class="d-flex flex-column">投稿日時:<%= @post.created_at.strftime("%Y/%m/%d %H:%M:%S") %></h5>
+            <h5 class="d-flex flex-column">地区:<%= @post.district.district_name %></h5>
+            <h5 class="d-flex flex-column">タイトル: <%= @post.posted_title %></h5>
+            <h5 class="d-flex flex-column">説明: <%= @post.posted_text %></h5>
+          </div>
         </div>
+        <div class="row justify-content-center">
+          <div class="col-3">コメント件数:<%= @post.posted_comments.count %></div>
+          <div class="col-3">
+             <!--危険マーク-->
+            <% if @post.dangered_by?(current_general_user) %>
+              <p>
+                <%= link_to post_dangers_path(@post), method: :delete do %>
+                  <!--FontAwesomeの危険マーク(押した後)-->
+                  <i class="fas fa-exclamation-triangle text-danger"></i><%= @post.dangers.count %>キケン
+                <% end %>
+              </p>
+            <% else %>
+              <p>
+                <%= link_to post_dangers_path(@post), method: :post do %>
+                  <!--FontAwesomeの危険マーク（押す前）-->
+                  <i class="fas fa-exclamation-triangle text-secondary"></i><%= @post.dangers.count %>キケン
+                <% end %>
+              </p>
+            <% end %>
+          </div>
+          <!--編集も削除も投稿したユーザー以外はできないようにする-->
+          <% if @post.general_user == current_general_user %>
+            <div class="col-2"><%= link_to "編集", edit_post_path(@post.id), class: "btn btn-warning" %></div>
+            <div class="col-2"><%= link_to "削除", post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %></div>
+          <% end %>
+        </div>
+      </div>
+      <div class="card mt-1 pb-3">
+        <div class="row">
+          <div class="col-11 offset-1 mt-4">
+            <h4>コメント投稿</h4>
+          </div>
+          <div class="col-11 offset-1 text-danger">
+            <% if @posted_comment.errors.any? %><br>
+              <%= @posted_comment.errors.count %>件のエラーが発生しました。
+              <ul>
+              <% @posted_comment.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            <% end %>
+          </div>
+            <!--コメントは、postに結びついたposted_commentのため、インスタンス変数を2つ指定-->
+          <div class="col-10 offset-1">
+            <%= form_with model: [@post, @posted_comment] do |f| %>
+            <%= f.text_field :posted_comment, class:"form-control mb-3" %>
+          </div>
+          <div class="col-4 offset-4 text-center">
+            <%= f.submit "投稿する", class: "btn btn-success btn-block" %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <table class="table table-hover">
+          <tbody>
+            <% @posted_comments.each do |posted_comment| %>
+            <tr>
+              <td scope="col-2"><%= image_tag posted_comment.general_user.get_profile_image(50,50) %></td>
+              <td scope="col-2"><%= posted_comment.general_user.last_name %><%= posted_comment.general_user.first_name %></td>
+              <td scope="col-4"><%= posted_comment.posted_comment %></td>
+              <td scope="col-2"><%= posted_comment.created_at.strftime("%Y/%m/%d") %></td>
+              <!--コメントがログインユーザーのものであれば削除ボタンを表示-->
+              <td scope="col-3"><% if posted_comment.general_user == current_general_user %>
+                <%= link_to "✖", post_posted_comment_path(posted_comment.post,posted_comment), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn-sm btn-danger" %>
+                <% end %>
+              </td>
+            </tr>
+            <% end %>
+         </tbody>
+        </table>
       </div>
       <div class="row justify-content-center">
-        <div class="col-3">コメント件数:<%= @post.posted_comments.count %></div>
-        <div class="col-3">
-           <!--危険マーク-->
-          <% if @post.dangered_by?(current_general_user) %>
-            <p>
-              <%= link_to post_dangers_path(@post), method: :delete do %>
-                <!--FontAwesomeの危険マーク(押した後)-->
-                <i class="fas fa-exclamation-triangle text-danger"></i><%= @post.dangers.count %>キケン
-              <% end %>
-            </p>
-          <% else %>
-            <p>
-              <%= link_to post_dangers_path(@post), method: :post do %>
-                <!--FontAwesomeの危険マーク（押す前）-->
-                <i class="fas fa-exclamation-triangle text-secondary"></i><%= @post.dangers.count %>キケン
-              <% end %>
-            </p>
-          <% end %>
-        </div>
-        <!--編集も削除も投稿したユーザー以外はできないようにする-->
-        <% if @post.general_user == current_general_user %>
-          <div class="col-2"><%= link_to "編集", edit_post_path(@post.id), class: "btn btn-warning" %></div>
-          <div class="col-2"><%= link_to "削除", post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %></div>
-        <% end %>
+          <div class="col-3 offset-2">
+            <%= paginate @posted_comments %>
+          </div>
       </div>
-    </div>
-    <div class="card mt-1 pb-3">
-      <div class="col-12 justify-content-center mt-5">
-        <h4>コメント投稿</h4>
-        <!--コメントは、postに結びついたposted_commentのため、インスタンス変数を2つ指定-->
-        <%= form_with model: [@post, @posted_comment] do |f| %>
-        <%= f.text_field :posted_comment, class:"form-control mb-3" %>
-        <div class="text-right">
-          <%= f.submit "投稿する", class: "btn btn-success" %>
-        </div>
-        <% end %>
-      </div>
-    </div>
-    <div class="row mt-3">
-      <table class="table table-hover">
-        <tbody>
-          <% @posted_comments.each do |posted_comment| %>
-          <tr>
-            <td scope="col" style="width: 10%"><%= image_tag posted_comment.general_user.get_profile_image(50,50) %></td>
-            <td scope="col" style="width: 20%"><%= posted_comment.general_user.last_name %><%= posted_comment.general_user.first_name %></td>
-            <td scope="col" style="width: 40%"><%= posted_comment.posted_comment %></td>
-            <td scope="col" style="width: 15%"><%= posted_comment.created_at.strftime("%Y/%m/%d") %></td>
-            <!--コメントがログインユーザーのものであれば削除ボタンを表示-->
-            <td scope="col" style="width: 15%"><% if posted_comment.general_user == current_general_user %>
-              <%= link_to "削除", post_posted_comment_path(posted_comment.post,posted_comment), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn-sm btn-danger" %>
-              <% end %>
-            </td>
-          </tr>
-          <% end %>
-       </tbody>
-      </table>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-3 offset-2">
-          <%= paginate @posted_comments %>
-        </div>
-    </div>
     </div>
   </div>
 </div>

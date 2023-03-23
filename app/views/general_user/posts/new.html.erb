@@ -2,6 +2,8 @@
   <div class="row m-3">
     <h2 class="col-4 text-center">危険箇所の投稿</h2>
   </div>
+  <div class="row">
+    <div class="col-6 text-danger">
       <% if @post.errors.any? %>
         <%= @post.errors.count %>件のエラーが発生しました。
       <ul>
@@ -10,6 +12,8 @@
         <% end %>
       </ul>
       <% end %>
+    </div>
+  </div>
       <!-- form_with部分 -->
       <%#= form_with model: @post, url: '/posts',method: :post do |f| %>
   <%= form_with model: @post do |f| %>

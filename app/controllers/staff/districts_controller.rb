@@ -5,8 +5,9 @@ class Staff::DistrictsController < ApplicationController
   end
 
   def create
-    district = District.new(district_params)
-    if district.save
+    @districts = District.all.page(params[:page])
+    @district = District.new(district_params)
+    if @district.save
       redirect_to request.referer #遷移元のページにリダイレクト
     else
       render :index

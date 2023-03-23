@@ -55,8 +55,8 @@ class GeneralUser::RegistrationsController < Devise::RegistrationsController
   end
 
   # The path used after sign up.
-  def after_sign_up_path_for(resource) # 新規登録したら投稿一覧に遷移
-    posts_path
+  def after_sign_up_path_for(resource) # 新規登録したらaboutページに遷移
+    about_path
   end
 
   # The path used after sign up for inactive accounts.

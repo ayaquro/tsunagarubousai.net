@@ -14,7 +14,6 @@ class GeneralUser < ApplicationRecord
   #会員ステータスを3つに分けたいときは以下を使う
   #enum registration_status: { registering: 0, in_suspend: 1, unsubscribe: 2 }
                                 #0:登録中、1：利用停止中、2：退会
-
   validates :last_name, presence: true
   validates :first_name, presence: true
   validates :kana_last_name, presence: true
@@ -29,7 +28,7 @@ class GeneralUser < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [width, height]).processed # メソッドに対し引数を設定し、引数に設定した値に画像サイズを変換するようにした
   end
-  
+
   #退会済みのユーザーが同じアカウントでログインできないように制約を設けている
   def active_for_authentication?
     super && (is_deleted == false)

@@ -35,13 +35,19 @@ class GeneralUser::SessionsController < Devise::SessionsController
   def reject_general_user
     #emailアドレスで会員を特定
     @general_user = GeneralUser.find_by(email: params[:general_user][:email])
-      #パスワードが正しいか確認し、かつis_deletedがtrue⇒退会状態、なのか確認
-      if @general_user.valid_password?(params[:general_user][:password]) && (@general_user.is_deleted == true)
-        flash[:notice] = "退会済です。再度会員登録をしてご利用ください。"
-        redirect_to  new_general_user_registration_path #新規会員登録画面に遷移
-      else
-        flash[:notice] = "項目を入力してください。"
-      end
+    #パスワードが正しいか確認し、かつis_deletedがtrue⇒退会状態、なのか確認
+    if is_deleted_general_user?
+      flash[:notice] = "退会済です。再度会員登録をしてご利用ください。"
+      redirect_to  new_general_user_registration_path #新規会員登録画面に遷移
+    else
+      flash[:notice] = "項目を入力してください。"
+    end
+  end
+  
+  private
+  
+  def is_deleted_general_user?
+    @general_user.present? && @general_user.valid_password?(params[:general_user][:password]) && (@general_user.is_deleted == true)
   end
 
   #protected

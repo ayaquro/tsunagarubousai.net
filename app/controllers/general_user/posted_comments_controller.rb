@@ -2,12 +2,14 @@
 
 class GeneralUser::PostedCommentsController < ApplicationController
   def create
-    post = Post.find(params[:post_id])
-    comment = current_general_user.posted_comments.new(posted_comment_params)
-    comment.post_id = post.id
-    if comment.save
-      redirect_to post_path(post)
-    else render post_path(post)
+    @post = Post.find(params[:post_id])
+    @posted_comments = @post.posted_comments.all.order(created_at: :desc).page(params[:page])
+    @posted_comment = current_general_user.posted_comments.new(posted_comment_params)
+    @posted_comment.post_id = @post.id
+    if @posted_comment.save
+      redirect_to post_path(@post)
+    else
+      render "general_user/posts/show"
     end
   end
 

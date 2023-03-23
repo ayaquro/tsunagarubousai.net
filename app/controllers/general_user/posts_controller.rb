@@ -9,12 +9,12 @@ class GeneralUser::PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)   # フォームに入力されたデータが@postに格納される
+    @post = Post.new(post_params)  # フォームに入力されたデータが@postに格納される
     @post.general_user_id = current_general_user.id   # この投稿のgeneral_user_idとして、current_user.idの値を代入
     @districts = District.all
     #@post.district_id = 1 # とりあえず仮で地域を入れておく
     if @post.save  # データをデータベースに保存するためのsaveメソッド実行
-      redirect_to posts_path # 投稿一覧画面へリダイレクト
+      redirect_to post_path(@post.id) # 投稿した投稿の詳細画面へリダイレクト
     else
       render :new
     end
@@ -39,10 +39,10 @@ class GeneralUser::PostsController < ApplicationController
   end
 
   def update
-    post = Post.find(params[:id])
+    @post = Post.find(params[:id])
     @districts = District.all
-    if post.update(post_params)
-      redirect_to post_path(post.id) # 投稿詳細ページにリダイレクト
+    if @post.update(post_params)
+      redirect_to post_path(@post.id) # 投稿詳細ページにリダイレクト
     else
       render :edit
     end
@@ -58,6 +58,6 @@ class GeneralUser::PostsController < ApplicationController
     # ストロングパラメータ
     def post_params
       params.require(:post).permit(:posted_title, :posted_text, :posted_image, :district_id)
-      # 後ほど地区選択もpermitの中に入れるかも
+
     end
 end
