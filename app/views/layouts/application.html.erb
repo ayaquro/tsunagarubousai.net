@@ -11,8 +11,15 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+  <!--管理者がログイン状態の時-->
+  <% if staff_signed_in? %>
+  <body class="d-flex flex-column vh-100 backstaffcolor">
+    <header class="shadow-sm headerstaffcolor">
+   <!--それ以外の時-->
+    <% else %>
   <body class="d-flex flex-column vh-100 backcolor">
     <header class="shadow-sm headercolor">
+    <% end %>
       <nav class="navbar navbar-expand-lg navbar-light text-light">
         <div class="container">
           <a class="navbar-brand p-3 text-light" href="/"><%= "つながる防災.net" %></a>
@@ -80,7 +87,13 @@
       <%= flash[:notice] %>
       <%= yield %>
     </main>
+    <!--管理者がログイン状態の時-->
+    <% if staff_signed_in? %>
+    <footer class="text-white pt-5 pb-4 headerstaffcolor">
+    <!--それ以外の時-->
+    <% else %>
     <footer class="text-white pt-5 pb-4 headercolor">
+    <% end %>
     </footer>
   </body>
 </html>
