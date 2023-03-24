@@ -3,6 +3,7 @@
 class GeneralUser::GeneralUsersController < ApplicationController
   before_action :ensure_guest_user, only: [:edit]
   def show
+    is_matching_login_general_user
     @general_user = GeneralUser.find(params[:id])
     @posts = @general_user.posts.order(created_at: :desc).page(params[:page])
     # アソシエーションを持っているモデル同士の記述方法。特定の@general_userに関連付けられた投稿すべて(.posts)
@@ -10,10 +11,12 @@ class GeneralUser::GeneralUsersController < ApplicationController
   end
 
   def edit
+    is_matching_login_general_user
     @general_user = GeneralUser.find(params[:id])
   end
 
   def update
+    is_matching_login_general_user
     @general_user = GeneralUser.find(params[:id])
     if @general_user.update(general_user_params)
       redirect_to general_user_path(current_general_user) # 一般ユーザーマイページ（詳細ページ）にリダイレクト
@@ -40,6 +43,14 @@ class GeneralUser::GeneralUsersController < ApplicationController
       @general_user = GeneralUser.find(params[:id])
       if @general_user.last_name == "ゲスト"
         redirect_to general_user_path(current_general_user) , notice: "ゲストユーザーはプロフィール編集画面へ遷移できません。"
+      end
+    end
+
+    #URLのユーザーとログインユーザーが一致しなければ、aboutページにリダイレクト
+    def is_matching_login_general_user
+      general_user = GeneralUser.find(params[:id])
+      unless general_user.id == current_general_user.id
+        redirect_to about_path
       end
     end
 end
