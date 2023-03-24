@@ -13,10 +13,9 @@
   </div>
   <div class="row mt-5">
     <div class="col-4 offset-2 text-center">
-      <%= link_to "はい、退会します", unsubscribe_path, method: :patch, data: { confilm: "本当に退会しますか？" }, class:"btn btn-danger btn-lg" %>
+      <%= link_to "はい、退会します", unsubscribe_path, method: :patch, "data-confirm" => "本当に退会しますか？", class:"btn btn-danger btn-lg" %>
     </div>
     <div class="col-4 text-center">
       <%= link_to "いいえ、退会しません", general_user_path(current_general_user), class:"btn btn-success btn-lg" %>
     </div>
   </div>
-  

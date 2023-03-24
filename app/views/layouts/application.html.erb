@@ -27,14 +27,14 @@
             <a class="navbar-brand p-3 text-light" href="/"><%= "つながる防災.net" %></a>
           </div>
           <!--ようこそ-->
-          <div class="col-2 text-center">
+          <div class="col-3 text-center">
             <% if general_user_signed_in? %>
               <h10 class="text-light">ようこそ、<%= current_general_user.last_name %><%= current_general_user.first_name %>さん！</h10>
             <% end %>
           </div>
           <!--ヘッダーの内容-->
             <!--ハンバーガーメニュー-->
-          <div class="col-8">
+          <div class="col-7">
             <button class="navbar-toggler text-light" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon text-light"></span>
             </button>

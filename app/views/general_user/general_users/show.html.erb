@@ -5,11 +5,7 @@
       <h4 class="row justify-content-center m-3">
         プロフィール
       </h4>
-      <div class="row m-3 justify-content-center">
-        <div class="col-12">
-          <%= image_tag @general_user.get_profile_image(300,300) %>
-        </div>
-      </div>
+      <%= image_tag @general_user.get_profile_image(300,300) %>
       <div class="row m-3 justify-content-center mt-2">
         <h6 class="d-flex flex-column">氏名:<%= @general_user.last_name %><%= @general_user.first_name %></h6>
         <h6 class="d-flex flex-column mt-2">カナ:<%= @general_user.kana_last_name %><%= @general_user.kana_first_name %></h6>

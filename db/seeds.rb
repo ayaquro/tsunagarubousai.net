@@ -11,3 +11,15 @@ Staff.create!(
   email: 'kanri@bousai.com',
   password: 'bousai',
   )
+
+GeneralUser.create!(
+  [
+    {last_name: '防災', first_name: '守子', kana_last_name: 'ボウサイ', kana_first_name: 'マコ', email: 'bousai@mako', encrypted_password: 'bousai', is_deleted: "false", profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-userw1.jpg"), filename:"sample-userw1.jpg")},
+  ]
+  )
+
+5.times do |n|
+  District.create!(
+    district_name: '福島#{n+1}',
+  )
+end

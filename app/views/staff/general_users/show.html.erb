@@ -12,6 +12,14 @@
         <h5 class="col-12 text-center">氏名:<%= @general_user.last_name %><%= @general_user.first_name %></h5>
         <h5 class="col-12 text-center">カナ:<%= @general_user.kana_last_name %><%= @general_user.kana_first_name %></h5>
         <h6 class="col-12 text-center">Email:<%= @general_user.email %></h6>
+        <h6 class="col-6 text-right">登録状況:</h6>
+        <h6 class="col-6 text-left">
+          <% if @general_user.is_deleted == false %>
+            <p class="text-success">有効</p>
+          <% else %>
+            <p class="text-danger">退会</p>
+          <% end %>
+        </h6>
         <div class="col-12 text-center"><%= link_to "プロフィールを編集", edit_staff_general_user_path(@general_user.id), class: "btn btn-warning" %></div>
       </div>
     </div>
