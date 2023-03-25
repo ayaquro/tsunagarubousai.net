@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Staff::UnlocksController < Devise::UnlocksController
+  before_action :authenticate_staff!, except: [:top, :about]
   # GET /resource/unlock/new
   # def new
   #   super

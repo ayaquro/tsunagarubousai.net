@@ -1,4 +1,5 @@
 class Staff::DistrictsController < ApplicationController
+  before_action :authenticate_staff!, except: [:top, :about]
   def index
     @district = District.new
     @districts = District.all.page(params[:page])

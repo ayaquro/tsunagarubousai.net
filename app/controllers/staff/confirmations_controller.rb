@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Staff::ConfirmationsController < Devise::ConfirmationsController
+  before_action :authenticate_staff!, except: [:top, :about]
   # GET /resource/confirmation/new
   # def new
   #   super

@@ -15,11 +15,11 @@
   <% if staff_signed_in? %>
   <body class="d-flex flex-column vh-100 backstaffcolor">
     <header class="shadow-sm headerstaffcolor">
-   <!--それ以外の時-->
-    <% else %>
+     <!--それ以外の時-->
+  <% else %>
   <body class="d-flex flex-column vh-100 backcolor">
     <header class="shadow-sm headercolor">
-    <% end %>
+  <% end %>
       <nav class="navbar navbar-expand-lg navbar-light text-light">
         <div class="container-fluid">
           <!--ロゴ-->
@@ -95,6 +95,7 @@
         </div>
       </nav>
     </header>
+    </header>
     <main class="mb-auto">
       <%= flash[:notice] %>
       <%= yield %>
@@ -107,5 +108,7 @@
     <footer class="text-white pt-5 pb-4 headercolor">
     <% end %>
     </footer>
+    </footer>
+  </body>
   </body>
 </html>

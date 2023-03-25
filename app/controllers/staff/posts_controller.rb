@@ -1,4 +1,5 @@
 class Staff::PostsController < ApplicationController
+  before_action :authenticate_staff!, except: [:top, :about]
   def index
     @posts = Post.all.order(created_at: :desc).page(params[:page])
   end

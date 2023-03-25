@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class GeneralUser::PostedCommentsController < ApplicationController
+  before_action :authenticate_general_user!, except: [:top, :about]
   def create
     @post = Post.find(params[:post_id])
     @posted_comments = @post.posted_comments.all.order(created_at: :desc).page(params[:page])

@@ -17,71 +17,71 @@
     </div>
   </div>
   <%= form_with model: @general_user, url: staff_general_user_path, method: :patch, local: true do |f| %>
-    <div class="row mt-3">
-      <div class="col-3 offset-1 text-right">
-        <h5>プロフィール画像</h5>
-      </div>
-      <div class="col-6">
-        <%= f.file_field :profile_image, placeholder:"プロフィール画像", accept: "image/*" %>
-      </div>
+  <div class="row mt-3">
+    <div class="col-3 offset-1 text-right">
+      <h5>プロフィール画像</h5>
     </div>
-    <div class="row mt-3">
-      <div class="col-2 offset-1 text-right">
-        <h5>名前</h5>
-      </div>
-      <div class="col-1 text-right">
-        <h6>姓</h6>
-      </div>
-      <div class="col-3">
-        <%= f.text_field :last_name, autofocus: true,class:"form-control" %>
-      </div>
-      <div class="col-1 text-right">
-        <h6>名</h6>
-      </div>
-      <div class="col-3">
-        <%= f.text_field :first_name, autofocus: true,class:"form-control" %>
-      </div>
+    <div class="col-6">
+    <%= f.file_field :profile_image, placeholder:"プロフィール画像", accept: "image/*" %>
     </div>
-    <div class="row mt-3">
-      <div class="col-1 offset-3 text-right">
-        <h6>セイ</h6>
-      </div>
-      <div class="col-3">
-        <%= f.text_field :kana_last_name, autofocus: true ,class:"form-control" %>
-      </div>
-      <div class="col-1 text-right">
-        <h6>メイ</h6>
-      </div>
-      <div class="col-3">
-        <%= f.text_field :kana_first_name, autofocus: true ,class:"form-control" %>
-      </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-2 offset-1 text-right">
+      <h5>名前</h5>
     </div>
-    <div class="row mt-3">
-      <div class="col-3 offset-1 text-right">
-        <h5>メールアドレス</h5>
-      </div>
-      <div class="col-6">
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" ,class:"form-control" %>
-      </div>
+    <div class="col-1 text-right">
+      <h6>姓</h6>
     </div>
-    <div class="row mt-3">
-      <div class="col-3 offset-1 text-right">
-        <h5>登録状況</h5>
-      </div>
-      <div class="col-1">
-        <!--デフォルトがfalseなので、チェックを入れる-->
-        <%= f.radio_button :is_deleted, :false, checked: true %>
-        <%= f.label :is_deleted, "有効", {value: :false, style: "display: inline-block;"} %>
-      </div>
-      <div class="col-1">
-        <%= f.radio_button :is_deleted, :true %>
-        <%= f.label :is_deleted, "退会", {value: :true, style: "display: inline-block;"} %>
-      </div>
+    <div class="col-3">
+      <%= f.text_field :last_name, autofocus: true,class:"form-control" %>
     </div>
-    <div class="row mt-2">
-      <div class="col-3 offset-4">
-        <%= f.submit "変更を保存", class:"btn btn-success btn-lg" %>
-      </div>
+    <div class="col-1 text-right">
+      <h6>名</h6>
     </div>
+    <div class="col-3">
+      <%= f.text_field :first_name, autofocus: true,class:"form-control" %>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-1 offset-3 text-right">
+      <h6>セイ</h6>
+    </div>
+    <div class="col-3">
+      <%= f.text_field :kana_last_name, autofocus: true ,class:"form-control" %>
+    </div>
+    <div class="col-1 text-right">
+      <h6>メイ</h6>
+    </div>
+    <div class="col-3">
+      <%= f.text_field :kana_first_name, autofocus: true ,class:"form-control" %>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-3 offset-1 text-right">
+      <h5>メールアドレス</h5>
+    </div>
+    <div class="col-6">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" ,class:"form-control" %>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-3 offset-1 text-right">
+      <h5>登録状況</h5>
+    </div>
+    <div class="col-1">
+      <!--デフォルトがfalseなので、チェックを入れる-->
+      <%= f.radio_button :is_deleted, :false, checked: true %>
+      <%= f.label :is_deleted, "有効", {value: :false, style: "display: inline-block;"} %>
+    </div>
+    <div class="col-1">
+      <%= f.radio_button :is_deleted, :true %>
+      <%= f.label :is_deleted, "退会", {value: :true, style: "display: inline-block;"} %>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-3 offset-4">
+      <%= f.submit "変更を保存", class:"btn btn-success btn-lg" %>
+    </div>
+  </div>
   <% end %>
 </div>

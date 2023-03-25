@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class GeneralUser::PostsController < ApplicationController
+  before_action :authenticate_general_user!, except: [:top, :about]
   def new
     # Viewへ渡すためのインスタンス変数に空のModelオブジェクトを生成する。
     @post = Post.new
@@ -55,7 +56,7 @@ class GeneralUser::PostsController < ApplicationController
   end
 
   private
-    # ストロングパラメータ
+    #ストロングパラメータ
     def post_params
       params.require(:post).permit(:posted_title, :posted_text, :posted_image, :district_id)
 

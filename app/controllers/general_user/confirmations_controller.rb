@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class GeneralUser::ConfirmationsController < Devise::ConfirmationsController
+  before_action :authenticate_general_user!, except: [:top, :about]
   # GET /resource/confirmation/new
   # def new
   #   super

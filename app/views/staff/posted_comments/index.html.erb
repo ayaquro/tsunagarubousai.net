@@ -15,16 +15,18 @@
         <th scope="col"></th>
       </tr>
     </thead>
-    <% @posted_comments.each do |posted_comment| %>
-    <tr>
-      <td><%= posted_comment.id %></td>
-      <td><%= posted_comment.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
-      <td><%= posted_comment.general_user.last_name %><%= posted_comment.general_user.first_name %></td>
-      <td><%= posted_comment.posted_comment %></td>
-      <td><%= link_to "投稿詳細", staff_post_path(posted_comment.post.id), class: "btn btn-sm btn-info" %></td>
-      <td><%= link_to "削除", staff_post_posted_comment_path(posted_comment.post.id,posted_comment.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger" %></td>
-    </tr>
-    <% end %>
+    <tbody>
+      <% @posted_comments.each do |posted_comment| %>
+      <tr>
+        <td><%= posted_comment.id %></td>
+        <td><%= posted_comment.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+        <td><%= posted_comment.general_user.last_name %><%= posted_comment.general_user.first_name %></td>
+        <td><%= posted_comment.posted_comment %></td>
+        <td><%= link_to "投稿詳細", staff_post_path(posted_comment.post.id), class: "btn btn-sm btn-info" %></td>
+        <td><%= link_to "削除", staff_post_posted_comment_path(posted_comment.post.id,posted_comment.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger" %></td>
+      </tr>
+      <% end %>
+    </tbody>
   </table>
   <div class="row">
     <div class="offset-5 col-2 text-center">

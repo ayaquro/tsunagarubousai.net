@@ -1,4 +1,5 @@
 class Staff::PostedCommentsController < ApplicationController
+  before_action :authenticate_staff!, except: [:top, :about]
   def index
     @posted_comments = PostedComment.all.order(created_at: :desc).page(params[:page])
   end

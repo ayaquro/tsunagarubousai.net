@@ -19,7 +19,8 @@
         <th scope="col"></th>
       </tr>
     </thead>
-    <% @posts.each do |post| %>
+    <tbody>
+      <% @posts.each do |post| %>
       <tr>
         <td><%= post.id %></td>
         <td><%= post.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
@@ -35,7 +36,8 @@
         <td><%= link_to "詳細", staff_post_path(post.id), class: "btn btn-sm btn-info" %></td>
         <td><%= link_to "削除", staff_post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger" %></td>
       </tr>
-    <% end %>
+      <% end %>
+    </tbody>
   </table>
   <div class="row">
     <div class="offset-5 col-2 text-center">
@@ -43,4 +45,3 @@
     </div>
   </div>
 </div>
-

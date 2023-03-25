@@ -1,4 +1,5 @@
 class Staff::GeneralUsersController < ApplicationController
+  before_action :authenticate_staff!, except: [:top, :about]
   def index
     @general_users = GeneralUser.all.page(params[:page])
   end

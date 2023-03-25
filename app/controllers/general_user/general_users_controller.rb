@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class GeneralUser::GeneralUsersController < ApplicationController
+  before_action :authenticate_general_user!, except: [:top, :about]
   before_action :ensure_guest_user, only: [:edit]
   def show
     is_matching_login_general_user
