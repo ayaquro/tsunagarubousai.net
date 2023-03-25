@@ -24,14 +24,14 @@
         <%= f.password_field :password, autocomplete: "パスワードを入力",class:"form-control" %>
       </div>
     </div>
-      <div class="row mt-3">
-        <div class="col-8 offset-4">
-          <% if devise_mapping.rememberable? %>
-            <%= f.check_box :remember_me %>
-            <%= f.label :remember_me %>
-          <% end %>
-        </div>
-      </div>
+      <!--<div class="row mt-3">-->
+        <!--<div class="col-8 offset-4">-->
+          <!--<%# if devise_mapping.rememberable? %>-->
+            <%#= f.check_box :remember_me %>
+            <%#= f.label :remember_me %>
+          <%# end %>
+        <!--</div>-->
+      <!--</div>-->
     <div class="row mt-3">
       <div class="col-3 offset-4">
         <%= f.submit "ログイン", class:"btn btn-primary btn-lg btn-block" %>
