@@ -24,7 +24,7 @@
       <tr>
         <td><%= post.id %></td>
         <td><%= post.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
-        <td><%= post.district_id %></td>
+        <td><%= post.district.district_name %></td>
         <td><%= post.posted_title %></td>
         <td><%= link_to post_path(post.id) do %>
               <%= image_tag post.get_image(100,100) %>
