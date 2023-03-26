@@ -53,7 +53,7 @@ class GeneralUser::PostsController < ApplicationController
 
   def destroy
     #post = Post.find(params[:id]) # 削除するデータ（レコード）を1件取得
-    post.destroy # データ（レコード）を削除
+    @post.destroy # データ（レコード）を削除
     redirect_to posts_path # 一覧ページにリダイレクト 要確認
   end
 

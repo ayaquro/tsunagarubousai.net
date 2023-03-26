@@ -4,14 +4,18 @@
       地区の編集
     </h2>
   </div>
-    <% if @district.errors.any? %>
-      <%= @district.errors.count %>件のエラーが発生しました。
-      <ul>
-        <% @district.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    <% end %>
+  <div class="row">
+    <div class="col-6 text-danger">
+      <% if @district.errors.any? %>
+        <%= @district.errors.count %>件のエラーが発生しました。
+        <ul>
+          <% @district.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  </div>
     <%= form_with model: @district, url: staff_district_path(@district.id), method: :patch do |f| %>
     <div class="row mt-3">
       <div class="col-3 text-right">

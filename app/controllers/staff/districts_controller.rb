@@ -20,8 +20,8 @@ class Staff::DistrictsController < ApplicationController
   end
 
   def update
-    district = District.find(params[:id])
-    if district.update(district_params)
+    @district = District.find(params[:id])
+    if @district.update(district_params)
       redirect_to staff_districts_path
     else
       render :edit
