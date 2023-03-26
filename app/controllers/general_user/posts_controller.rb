@@ -2,6 +2,8 @@
 
 class GeneralUser::PostsController < ApplicationController
   before_action :authenticate_general_user!, except: [:top, :about]
+  before_action :ensure_general_user, only: [:edit, :update, :destroy]
+
   def new
     # Viewへ渡すためのインスタンス変数に空のModelオブジェクトを生成する。
     @post = Post.new
@@ -29,7 +31,7 @@ class GeneralUser::PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
+    #@post = Post.find(params[:id])
     @districts = District.all
   end
 
@@ -40,7 +42,7 @@ class GeneralUser::PostsController < ApplicationController
   end
 
   def update
-    @post = Post.find(params[:id])
+    #@post = Post.find(params[:id])
     @districts = District.all
     if @post.update(post_params)
       redirect_to post_path(@post.id) # 投稿詳細ページにリダイレクト
@@ -50,7 +52,7 @@ class GeneralUser::PostsController < ApplicationController
   end
 
   def destroy
-    post = Post.find(params[:id]) # 削除するデータ（レコード）を1件取得
+    #post = Post.find(params[:id]) # 削除するデータ（レコード）を1件取得
     post.destroy # データ（レコード）を削除
     redirect_to posts_path # 一覧ページにリダイレクト 要確認
   end
@@ -59,6 +61,12 @@ class GeneralUser::PostsController < ApplicationController
     #ストロングパラメータ
     def post_params
       params.require(:post).permit(:posted_title, :posted_text, :posted_image, :district_id)
+    end
 
+    #URLのIDの投稿をしたユーザーとログインユーザーが一致しなければ、aboutページにリダイレクト
+    def ensure_general_user
+      @posts = current_general_user.posts
+      @post = @posts.find_by(id: params[:id])
+      redirect_to about_path if @post.blank? #もし今ログインしているユーザーの@postが空だったらaboutページへリダイレクト
     end
 end
