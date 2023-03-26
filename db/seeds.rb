@@ -21,8 +21,31 @@ general_users=GeneralUser.create!(
   ]
   )
 
-5.times do |n|
-  District.create!(
-    district_name: "福島#{n+1}",
+#5.times do |n|
+  #District.create!(
+    #district_name: "福島#{n+1}",
+  #)
+districts=District.create!(
+  [
+    {district_name: '会津'},
+    {district_name: '福島'},
+    {district_name: '郡山'},
+    {district_name: 'いわき'}
+  ]
   )
-end
+
+posts=Post.create!(
+  [
+    {posted_title: '山崩れ', posted_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/山崩れ.jpg"), filename:"山崩れ.jpg"), posted_text: '山が崩れています。', general_user_id: general_users[0].id, district_id: districts[0].id },
+    {posted_title: '土砂崩れ', posted_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/土砂崩れ.jpg"), filename:"土砂崩れ.jpg"), posted_text: '土砂崩れが起きています。', general_user_id: general_users[1].id, district_id: districts[1].id  },
+    {posted_title: '法面崩壊', posted_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/法面崩壊.jpg"), filename:"法面崩壊.jpg"), posted_text: '法面が崩壊して通行できなくなっています。', general_user_id: general_users[2].id, district_id: districts[2].id  }
+  ]
+  )
+
+PostedComment.create!(
+  [
+    {posted_comment: '危険ですね。', general_user_id: general_users[0].id, post_id: posts[2].id },
+    {posted_comment: '早く直してほしいです。',  general_user_id: general_users[1].id, post_id: posts[0].id },
+    {posted_comment: 'いつも使う道なので早急に対応してほしいです。',general_user_id: general_users[2].id, post_id: posts[1].id }
+  ]
+)
