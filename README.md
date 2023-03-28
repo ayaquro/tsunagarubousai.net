@@ -27,7 +27,7 @@
 - 災害発生時の避難所情報、物資の過不足情報の共有
 
 ## 設計書
-<...>
+- [ER図](https://drive.google.com/file/d/13f_z2ADNkZffoiXHdtQGPp_HjwBDT754/view?usp=sharing)
 
 ## 開発環境
 - OS：Linux(CentOS)
