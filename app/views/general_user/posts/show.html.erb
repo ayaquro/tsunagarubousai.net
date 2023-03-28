@@ -22,22 +22,10 @@
         <div class="row justify-content-center">
           <div class="col-3">コメント件数:<%= @post.posted_comments.count %></div>
           <div class="col-3">
-             <!--危険マーク-->
-            <% if @post.dangered_by?(current_general_user) %>
-              <p>
-                <%= link_to post_dangers_path(@post), method: :delete do %>
-                  <!--FontAwesomeの危険マーク(押した後)-->
-                  <i class="fas fa-exclamation-triangle text-danger"></i><%= @post.dangers.count %>キケン
-                <% end %>
-              </p>
-            <% else %>
-              <p>
-                <%= link_to post_dangers_path(@post), method: :post do %>
-                  <!--FontAwesomeの危険マーク（押す前）-->
-                  <i class="fas fa-exclamation-triangle text-secondary"></i><%= @post.dangers.count %>キケン
-                <% end %>
-              </p>
-            <% end %>
+            <!--危険マークの部分テンプレート-->
+            <div id="danger_btn_<%= @post.id %>">
+              <%= render 'general_user/dangers/danger', post: @post %>
+            </div>
           </div>
           <!--編集も削除も投稿したユーザー以外はできないようにする-->
           <% if @post.general_user == current_general_user %>

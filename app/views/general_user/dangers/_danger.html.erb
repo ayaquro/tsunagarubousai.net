@@ -1,0 +1,12 @@
+<!--危険マーク-->
+<% if post.dangered_by?(current_general_user) %>
+  <%= link_to post_dangers_path(post), method: :delete, remote: true, class: "danger_btn" do %>
+    <!--FontAwesomeの危険マーク(押した後)-->
+    <i class="fas fa-exclamation-triangle text-danger"></i><%= post.dangers.count %>キケン
+  <% end %>
+<% else %>
+  <%= link_to post_dangers_path(post), method: :post, remote: true, class: "danger_btn" do %>
+    <!--FontAwesomeの危険マーク（押す前）-->
+    <i class="fas fa-exclamation-triangle text-secondary"></i><%= post.dangers.count %>キケン
+  <% end %>
+<% end %>
