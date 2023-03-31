@@ -15,7 +15,7 @@ class GeneralUser::PostedCommentsController < ApplicationController
   end
 
   def destroy
-    PostedComment.find_by(id: params[:id], post_id: params[:post_id]).destroy
+    PostedComment.find(params[:id]).destroy
     flash.now[:alert] = "コメントを削除しました。"
     @post = Post.find(params[:post_id])
   end
