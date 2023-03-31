@@ -49,36 +49,17 @@
               </ul>
             <% end %>
           </div>
-            <!--コメントは、postに結びついたposted_commentのため、インスタンス変数を2つ指定-->
-          <div class="col-10 offset-1">
-            <%= form_with model: [@post, @posted_comment] do |f| %>
-            <%= f.text_field :posted_comment, class:"form-control mb-3" %>
+            <!--コメント投稿フォームの部分テンプレート-->
+          <div class="new-comment col-10 offset-1">
+            <%= render 'general_user/posted_comments/form', post: @post, posted_comment: @posted_comment %>
           </div>
-          <div class="col-4 offset-4 text-center">
-            <%= f.submit "投稿する", class: "btn btn-success btn-block" %>
-          </div>
-          <% end %>
         </div>
       </div>
-      <div class="row mt-3">
-        <table class="table table-hover">
-          <tbody>
-            <% @posted_comments.each do |posted_comment| %>
-            <tr>
-              <td scope="col-2"><%= image_tag posted_comment.general_user.get_profile_image(50,50) %></td>
-              <td scope="col-2"><%= posted_comment.general_user.last_name %><%= posted_comment.general_user.first_name %></td>
-              <td scope="col-4"><%= posted_comment.posted_comment %></td>
-              <td scope="col-2"><%= posted_comment.created_at.strftime("%Y/%m/%d") %></td>
-              <!--コメントがログインユーザーのものであれば削除ボタンを表示-->
-              <td scope="col-3"><% if posted_comment.general_user == current_general_user %>
-                <%= link_to "✖", post_posted_comment_path(posted_comment.post,posted_comment), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn-sm btn-danger" %>
-                <% end %>
-              </td>
-            </tr>
-            <% end %>
-         </tbody>
-        </table>
-      </div>
+            <!--コメント一覧部分の部分テンプレート-->
+            <div id="comments_area">
+              <%= render 'general_user/posted_comments/posted_comments', posted_comments: @posted_comments %>
+            </div>
+
       <div class="row justify-content-center">
           <div class="col-3 offset-2">
             <%= paginate @posted_comments %>

@@ -8,15 +8,16 @@ class GeneralUser::PostedCommentsController < ApplicationController
     @posted_comment = current_general_user.posted_comments.new(posted_comment_params)
     @posted_comment.post_id = @post.id
     if @posted_comment.save
-      redirect_to post_path(@post)
+      flash.now[:notice] = "コメントを投稿しました。"
     else
       render "general_user/posts/show"
     end
   end
 
   def destroy
-    PostedComment.find(params[:id]).destroy
-    redirect_to post_path(params[:post_id])
+    PostedComment.find_by(id: params[:id], post_id: params[:post_id]).destroy
+    flash.now[:alert] = "コメントを削除しました。"
+    @post = Post.find(params[:post_id])
   end
 
   private

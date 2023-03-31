@@ -1,0 +1,7 @@
+<!--コメントは、postに結びついたposted_commentのため、インスタンス変数を2つ指定-->
+  <%= form_with model: [post, posted_comment], local: false do |f| %>
+  <%= f.text_area :posted_comment, placeholder: "コメントをここに", class:"form-control mb-3" %>
+<div class="col-4 offset-4 text-center">
+  <%= f.submit "投稿する", class: "btn btn-success btn-block" %>
+</div>
+  <% end %>
