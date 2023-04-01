@@ -1,8 +1,8 @@
 <div class="row mt-3">
   <table class="table table-hover">
     <tbody>
-    <% if post.posted_comments.present? %>
-      <% post.posted_comments.each do |posted_comment| %>
+    <% if posted_comments.present? %>
+      <% posted_comments.each do |posted_comment| %>
       <tr>
         <td scope="col-2"><%= image_tag posted_comment.general_user.get_profile_image(50,50) %></td>
         <td scope="col-2"><%= posted_comment.general_user.last_name %><%= posted_comment.general_user.first_name %></td>

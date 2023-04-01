@@ -24,7 +24,7 @@ class GeneralUser::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all.order(created_at: :desc).page(params[:page])
+    @posts = Post.order(created_at: :desc).page(params[:page])
     @posts = @posts.where(district_id: params[:district_ids]) if params[:district_ids] && params[:district_ids].compact_blank.any?
     @posts = @posts.where('posted_title like ?', "%#{params[:keyword]}%").or(@posts.where('posted_text like ?', "%#{params[:keyword]}%")) if params[:keyword].present?
     @districts = District.all
@@ -38,7 +38,7 @@ class GeneralUser::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @posted_comment = PostedComment.new
-    @posted_comments = @post.posted_comments.all.order(created_at: :desc).page(params[:page])
+    @posted_comments = @post.posted_comments.order(created_at: :desc).page(params[:page])
   end
 
   def update
