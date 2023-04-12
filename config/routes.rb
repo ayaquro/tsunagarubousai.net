@@ -34,7 +34,9 @@ Rails.application.routes.draw do
       resources :posted_comments, only: [:create, :destroy]
     end
     resources :general_users, only: [:show, :edit, :update]
-
+    #地図機能
+    #get 'maps/index'
+    resources :maps, only: [:index]
   end
   #管理者側のルーティング設定
   namespace :staff do

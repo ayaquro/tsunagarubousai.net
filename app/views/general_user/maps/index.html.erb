@@ -1,0 +1,52 @@
+<h2>gmap</h2>
+<input id="address" type="textbox" value="いわき市役所">
+<input type="button" value="Encode" onclick="codeAddress()">
+<div id="display">検索結果の緯度経度が表示される</div>
+<div id='map'></div>
+
+<style>
+  #map {
+    height: 600px;
+    width: 600px;
+  }
+</style>
+
+<script>
+  let map
+  let geocoder
+  const display = document.getElementById('display')
+
+  function initMap(){
+    geocoder = new google.maps.Geocoder()
+
+    map = new google.maps.Map(document.getElementById('map'), {
+      // centerで初期位置の緯度経度を指定。latが緯度、lngが経度
+      center: {lat: 37.0505055, lng:140.8877435},
+      zoom: 12,
+    });
+    //positionに指定した座標にピンを表示させる
+    marker = new google.maps.Marker({
+      position: {lat: 37.0505055, lng:140.8877435},
+      map: map
+    });
+  }
+
+
+  function codeAddress(){
+    let inputAddress = document.getElementById('address').value;
+    geocoder.geocode( { 'address': inputAddress}, function(results, status){
+      if (status == 'OK') {
+        map.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location
+        });
+        display.textContent = "検索結果:" + results[ 0 ].geometry.location
+      }else {
+        alert('該当する結果がありませんでした:' + status);
+      }
+    });
+  }
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_MAP_API_KEY"] %>&callback=initMap" async defer></script>
