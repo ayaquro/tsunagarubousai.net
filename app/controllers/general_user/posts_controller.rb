@@ -60,7 +60,7 @@ class GeneralUser::PostsController < ApplicationController
   private
     #ストロングパラメータ
     def post_params
-      params.require(:post).permit(:posted_title, :posted_text, :posted_image, :district_id)
+      params.require(:post).permit(:posted_title, :posted_text, :posted_image, :district_id, :lat, :lng)
     end
 
     #URLのIDの投稿をしたユーザーとログインユーザーが一致しなければ、aboutページにリダイレクト
