@@ -83,8 +83,8 @@ ActiveRecord::Schema.define(version: 2023_04_12_141410) do
     t.text "posted_text", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.float "lat"
-    t.float "lng"
+    t.float "lat", null: false
+    t.float "lng", null: false
   end
 
   create_table "staffs", force: :cascade do |t|

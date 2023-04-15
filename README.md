@@ -35,6 +35,8 @@
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
 - IDE：Cloud9
+- 外部API：Maps JavaScript API
+- 外部API：Geocoding API
 
 ## 使用素材
 - 画像使用　[photoAC](https://www.photo-ac.com/)

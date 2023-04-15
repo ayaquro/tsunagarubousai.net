@@ -86,9 +86,9 @@
       transitLayer.setMap(map);
       // 複数マーカー　ここから
       <% @posts.each do |post|%>
-        ( function() {
+        (function() {
           // 経度緯度のデータ作成
-          let markerLatLng = { lat: <%= post.lat %>, lng: <%= post.lng %> };
+          var markerLatLng = { lat: <%= post.lat %>, lng: <%= post.lng %> };
           let marker = new google.maps.Marker({
             position: markerLatLng,
             map: map
