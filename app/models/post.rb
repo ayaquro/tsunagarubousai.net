@@ -10,6 +10,8 @@ class Post < ApplicationRecord
   validates :posted_title, presence: true
   validates :posted_text, presence: true
   validates :posted_image, presence: true
+  validates :lat, presence: true
+  validates :lng, presence: true
 
   def get_image(width, height) #ここで指定したget_imageメソッドを、viewの画像のところで使う。
     unless posted_image.attached?
