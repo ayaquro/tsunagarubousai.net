@@ -1,0 +1,54 @@
+<div class="container mt-5 p-5 card shadow-lg">
+  <div class="row m-3 text-center">
+    <h1 class="col">
+      お問い合わせフォーム
+    </h1>
+  </div>
+  <div class="row">
+    <div class="col-6 text-danger">
+      <% if @inquiry.errors.any? %>
+        <%= @inquiry.errors.count %>件のエラーが発生しました。
+      <ul>
+        <% @inquiry.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+      <% end %>
+    </div>
+  </div>
+  <%= form_with model: @inquiry, url: inquiries_path, method: :post, local: true do |f| %>
+  <div class="row mt-3">
+    <div class="col-3 offset-1 text-right">
+      <h5>お名前</h5>
+    </div>
+    <div class="col-6">
+      <%= f.text_field :name, placeholder: "例）防災　花子" ,class:"form-control"%>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-3 offset-1 text-right">
+      <h5>メールアドレス</h5>
+    </div>
+    <div class="col-6">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "例）bousai@taisaku.example" ,class:"form-control"%>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <h5 class="col-3 offset-1 text-right">件名</h5>
+    <div class="col-7">
+      <%= f.text_field :subject, class: "form-control" %>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <h5 class="col-3 offset-1 text-right">お問い合わせ内容</h5>
+    <div class="col-7">
+      <%= f.text_area :message, class: "form-control" %>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-3 offset-4">
+      <%= f.submit "入力内容", class:"btn btn-success btn-lg btn-block" %>
+    </div>
+  </div>
+  <% end %>
+</div>

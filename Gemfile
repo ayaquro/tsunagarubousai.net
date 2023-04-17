@@ -54,6 +54,7 @@ group :development do
   gem "rubocop-minitest", require: false
   gem "rubocop-packaging", require: false
   gem "rubocop-rspec"
+  gem "letter_opener_web"
 end
 
 group :test do

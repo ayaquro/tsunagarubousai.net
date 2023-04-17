@@ -36,7 +36,13 @@ Rails.application.routes.draw do
     resources :general_users, only: [:show, :edit, :update]
     #地図機能
     #get 'maps/index'
-    resources :maps, only: [:index]
+    #resources :maps, only: [:index]
+
+    #お問い合わせフォーム
+    resources :inquiries, only: [:new, :create]
+    post 'inquiries/confirm' => 'inquiries#confirm'
+    post 'inquiries/back', to: 'inquiries#back', as: 'back'
+    get 'done', to: 'inquiries#done', as: 'done'
   end
   #管理者側のルーティング設定
   namespace :staff do
@@ -47,6 +53,6 @@ Rails.application.routes.draw do
     end
     resources :posted_comments, only: [:index]
   end
-
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
